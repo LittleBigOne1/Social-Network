@@ -12,18 +12,9 @@ module.exports = (req, res, next) => {
       userId: userId,
     };
     console.log(
-      '-----#auth.js------ USER ID =====>' + userId + '-------FIN---------'
+     // '-----#auth.js------ USER ID =====>' + userId + '-------FIN---------'
     );
-    ///////// test avec token FIN //////////////////////////////////
-    /**
-    const token = req.headers.authorization.split(' ')[1]; // Recupere le token du header créé par le login
-    const decodedToken = jwt.verify(token, process.env.TOKEN_KEY); // verifie le token  grace à la clé secrète stockée dans la variable d'envionnement
-    //console.log(decodedToken);
-    const userId = decodedToken.userId;
-    req.auth = {
-      userId: userId,
-    };
-     */
+    // if decoded valid token next else 
     next();
   } catch (error) {
     res.status(401).json({ error });

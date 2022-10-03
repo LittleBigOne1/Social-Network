@@ -8,7 +8,6 @@ const multer = require('../middleware/multer-config'); //Import du middleware de
 
 // import des controlleurs
 const postCtrl = require('../controllers/post');
-const commentCtrl = require('../controllers/comment');
 
 // posts routes
 router.get('/', auth, postCtrl.getAllPosts);
@@ -19,8 +18,7 @@ router.delete('/:id', auth, postCtrl.deletePost);
 router.post('/:id/like', auth, postCtrl.likeOrNot);
 
 //comments routes
-router.post('/:id/comment', auth, commentCtrl.createComment);
-router.put('/:id/comment', auth, commentCtrl.editComment);
-router.post('/:id/comment/delete', auth, commentCtrl.deleteComment);
-
+router.post('/:id/comment', auth, postCtrl.createComment);
+router.put('/:id/comment', auth, postCtrl.editComment);
+router.delete('/:id/comment/delete', auth, postCtrl.deleteComment);
 module.exports = router;

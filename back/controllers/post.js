@@ -1,6 +1,7 @@
 const postModel = require('../models/post'); // import du modèle Post
 const fs = require('fs'); // import du module file system, package qui permet de modifier et/ou supprimer des fichiers
 const userModel = require('../models/user');
+const commentModel = require('../models/comment');
 
 // export de la fonction de création d'un post
 
@@ -48,10 +49,14 @@ exports.createPost = (req, res, next) => {
 
 // export de la fonction d'affichage d'un post
 exports.getOnePost = (req, res, next) => {
-  postModel.findOne({ _id: req.params.id })
+  postModel
+    .findOne({ _id: req.params.id })
     .then((post) => {
       //console.log('------#controllers/post.js-------console log POST'+post);
-      res.status(200).json(post);
+      commentModel.find({ postId: post._id }).then((comments) => {
+        let object = { post: post, comments: comments };
+        res.status(200).json(object);
+      });
     })
     .catch((error) => {
       res.status(404).json({
@@ -74,12 +79,11 @@ exports.updatePost = (req, res, next) => {
 
   delete postObject._userId;
   // retourne le seul post ayant pour identifiant celui indiqué en paramètre
-  userModel.findOne({ _id: req.auth.userId }).then((user) => {
-    console.log('-----je suis le user-------' + user + '-----FIN------');
+  userModel.findOne({ _id: req.auth.userId })
+  .then((user) => {
     postModel
       .findOne({ _id: req.params.id })
       .then((post) => {
-        console.log('-----je suis le post-------' + post + '------FIN-----');
         if (post.userId === req.auth.userId || user.isAdmin === true) {
           // suppression de l'ancienne image (son fichier
           const filename = post.imageUrl.split('/images/')[1];
@@ -87,8 +91,7 @@ exports.updatePost = (req, res, next) => {
             if (error) throw error;
           });
           // mets à jour la base donnée en modifiant les caractéristiques ou l'image du post
-          postModel
-            .updateOne(
+          postModel.updateOne(
               { _id: req.params.id },
               { ...postObject, _id: req.params.id }
             )
@@ -185,4 +188,81 @@ exports.likeOrNot = (req, res, next) => {
         error: error,
       });
     });
+};
+exports.createComment = (req, res, next) => {
+  postModel
+    .findOne({ _id: req.params.id })
+    .then((post) => {
+      //console.log(post);
+      //console.log('---controllers/post.js/createComment---'+req.body.comment)+'---FIIIIIN---';
+      const comment = new commentModel({
+        // création d'objet comment à partir du model Comment
+        userId: req.auth.userId,
+        postId: post._id,
+        message: req.body.comment,
+      });
+
+      comment
+        .save() // sauvegarde du commentaire dans la base de donnée
+        .then(() => {
+          res.status(201).json({ message: 'Commentaire crée !' });
+        })
+        .catch((error) => {
+          res.status(400).json({ error });
+        });
+    })
+    .catch((error) => {
+      res.status(404).json({
+        error: error,
+      });
+    });
+};
+exports.editComment = (req, res, next) => {
+  
+  // userModel.findOne({ _id: req.auth.userId }).then((user) => {
+  //   //console.log(req);
+  //   postModel.findOne({ _id: req.params.id })
+    
+  //     .then((comment) => {
+  //       console.log(comment);
+  //       if (comment.userId === req.auth.userId || user.isAdmin === true) {
+  //         // mets à jour la base donnée en modifiant les caractéristiques
+  //         //console.log('---controllers/post.js/editComment---'+commentObject+'-----FIIIIN');
+  //         commentModel.updateOne(
+  //             { _id: req.params.id },
+  //             { ...req.body.comment, _id: req.params.id }
+  //           )
+  //           .then(() => res.status(200).json({ message: 'commentaire modifié!' }))
+  //           .catch((error) => res.status(401).json({ error }));
+  //       } else {
+  //         res.status(403).json({ message: 'Not authorized' });
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       res.status(400).json({ error });
+  //     });
+  // });
+};
+
+exports.deleteComment = (req, res, next) => {
+  userModel.findOne({ _id: req.auth.userId }).then((user) => {
+    // retourne le seul post ayant pour identifiant celui indiqué en paramètre
+    commentModel
+      .findOne({ _id: req.params.id })
+      .then((comment) => {
+        if (comment.userId === req.auth.userId || user.isAdmin === true) {
+          postModel
+            .deleteOne({ _id: req.params.id })
+            .then(() => {
+              res.status(200).json({ message: 'commentaire supprimé !' });
+            })
+            .catch((error) => res.status(401).json({ error }));
+        } else {
+          res.status(403).json({ message: 'Not authorized' });
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({ error });
+      });
+  });
 };

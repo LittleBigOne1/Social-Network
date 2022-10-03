@@ -21,17 +21,6 @@ const postSchema = mongoose.Schema(
     usersLiked: {
       type: [String],
       require: true,
-    },
-    comments:{
-      type: [
-        {commenterId: String,
-        commenterFirstName: String,
-        commenterLastName: String,
-        commenterProfilePicture: String,
-        text: String,
-        timestamp: Number,
-      }
-      ]
     }
   },
   { timestamps: true }

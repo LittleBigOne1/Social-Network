@@ -6,6 +6,6 @@ const userCtrl = require('../controllers/user');
 
 router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
-router.get('/logout', auth, userCtrl.logout);
+router.get('/logout', auth, userCtrl.logout); // peut etre géré depuis le front <==== mais plus sécurisé
 
 module.exports = router;
