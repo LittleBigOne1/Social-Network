@@ -1,0 +1,15 @@
+.form-login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-input{
+    padding: 10px ;
+    margin: 10px 0;
+    width: 50%;
+    border-radius: 10px;
+    border: 2px solid rgba(0, 0, 0, 0.626);
+}
+.img-groupomania{
+    margin-top: 100px;
+}
