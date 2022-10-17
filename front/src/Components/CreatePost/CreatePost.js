@@ -4,7 +4,7 @@ import './CreatePost.css'
 
 export default function CreatePost() {
   const params = useParams()
-  console.log(params);
+  // console.log(params);
   return (
     < >
         <h1>Quoi de neuf ?</h1>
