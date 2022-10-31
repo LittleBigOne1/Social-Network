@@ -1,0 +1,63 @@
+.card {
+    width: 70%;
+    min-width: 300px;
+    max-width: 650px;
+    background: rgb(255, 0, 0);
+    margin: 10px;
+    /* cursor: pointer; */
+    min-height: 200px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card h2 {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 18px;
+}
+.pp{
+    padding: 0 10px;
+}
+.pp img {
+    
+    border-radius: 50%;
+    background-color: #fff;
+    height: 50px;
+    width: 50px;
+}
+
+.card-img {
+    width: 100%;
+    object-fit: contain;
+}
+
+.card-img img {
+    width: 100%;
+    background: #000;
+}
+
+.card-pp-name {
+    display: flex;
+}
+.name-time{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.timeStamp{
+    padding-top: 2px;
+    font-size: 12px;
+    font-style: italic;
+}
+
+
+@media screen and (max-width: 500px) {
+    .card {
+        width: 100%;
+    }
+}

@@ -10,9 +10,9 @@ const multer = require('../middleware/multer-config'); //Import du middleware de
 const postCtrl = require('../controllers/post');
 
 // posts routes
-router.get('/', postCtrl.getAllPosts); // ----- remettre le auth !!!!!
+router.get('/', auth,postCtrl.getAllPosts); // ----- remettre le auth !!!!!
 router.get('/:id', auth, postCtrl.getOnePost);
-router.post('/', auth, multer, postCtrl.createPost);
+router.post('/',  multer, postCtrl.createPost);
 router.put('/:id', auth, multer, postCtrl.updatePost);
 router.delete('/:id', auth, postCtrl.deletePost);
 router.post('/:id/like', auth, postCtrl.likeOrNot);

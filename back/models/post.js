@@ -9,7 +9,7 @@ const postSchema = mongoose.Schema(
     message: {
       type: String,
       required: true,
-      max: 600,
+      max: 1000,
     },
     imageUrl: {
       type: String,
@@ -21,7 +21,8 @@ const postSchema = mongoose.Schema(
     usersLiked: {
       type: [String],
       require: true,
-    }
+    },
+  
   },
   { timestamps: true }
 );

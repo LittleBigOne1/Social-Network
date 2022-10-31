@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
 const PostsRoutes = require('./routes/post');
 const path = require('path'); // module qui permet de travailler avec des répertoires et des chemins de fichiers
-//const helmet = require('helmet'); // module qui aide à sécuriser les en-têtes HTTP
+const helmet = require('helmet'); // module qui aide à sécuriser les en-têtes HTTP
 const dotenv = require('dotenv'); // module sans dépendance qui charge les variables d'environnement dans un fichier .env
 dotenv.config();
 const cookieParser = require('cookie-parser');
@@ -38,8 +38,8 @@ app.use((req, res, next) => {
 });
 app.use(cookieParser());
 app.use(morgan('dev'));
-//app.use(helmet());
-//app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
 app.use('/images', express.static(path.join(__dirname, 'images'))); // /Défini le chemin du dossier où les fichiers sont stockés une fois importés
 app.use('/api/auth', userRoutes);
 app.use('/api/posts', PostsRoutes);

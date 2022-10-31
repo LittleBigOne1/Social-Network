@@ -27,15 +27,7 @@ export default function Navbar() {
       <nav>
         {(toggleMenu || largeur > 500) && (
           <div className="liste">
-            <NavLink
-              // className={({ isActive }) =>
-              //   isActive ? 'activeLink items' : 'items'
-              // }
-              to="/"
-            >
-              <img src="front/src/assets/icon-left-font-monochrome-white.png" alt="" />
-              {/* <Logo/> */}
-            </NavLink>
+            
             <NavLink
               // className={({ isActive }) =>
               //   isActive ? 'activeLink items' : 'items'
