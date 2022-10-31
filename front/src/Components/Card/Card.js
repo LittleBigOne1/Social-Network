@@ -5,7 +5,7 @@ import Like from '../Like/Like';
 import './Card.css';
 // import PP from "./default_profil_picture_user.png";
 export default function Card(props) {
-   // console.log('props =>',props);
+   console.log('props =>',props);
    const [totalLikes, setTotalLikes] = useState(props.likes);
    const [postId, setPostId] = useState(props.id);
    const [usersLiked, setUsersLiked] = useState(props.usersLiked);

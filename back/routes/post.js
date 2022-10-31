@@ -12,7 +12,7 @@ const postCtrl = require('../controllers/post');
 // posts routes
 router.get('/', auth,postCtrl.getAllPosts); // ----- remettre le auth !!!!!
 router.get('/:id', auth, postCtrl.getOnePost);
-router.post('/',  multer, postCtrl.createPost);
+router.post('/', auth, multer, postCtrl.createPost);
 router.put('/:id', auth, multer, postCtrl.updatePost);
 router.delete('/:id', auth, postCtrl.deletePost);
 router.post('/:id/like', auth, postCtrl.likeOrNot);

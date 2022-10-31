@@ -4,11 +4,17 @@ module.exports = (req, res, next) => {
    try {
       console.log('-------- début try ---------');
       console.log('-------- req.headers ---------',req.headers);
-      if (req.headers.authorization === 'bearer undefined') {
+      console.log('==========',req.cookies
+         );
+         console.log('----req----',req.cookie);
+      console.log('-------- req.headers.cookie ---------',req.headers.cookie.jwt);
+      console.log('-------- req.headers.cookie ---------',req.headers.cookie.split('token='));
+      if (req.cookies.token == undefined) {
         console.log('------ if req.headers.authorization');
+
          return res.status(403).json({ error});
       }else{
-        const token = req.headers.authorization.split(' ')[1]; // récupère le token enregistré dans le cookie crée lors de la connexion
+        const token = req.cookies.token; // récupère le token enregistré dans le cookie crée lors de la connexion
         console.log('------ token ==>', token);
         const decodedToken = jwt.verify(token, process.env.TOKEN_KEY); // verifie le token  grace à la clé secrète stockée dans la variable d'envionnement
       console.log('------ decodedToken -----', decodedToken);
