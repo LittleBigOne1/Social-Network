@@ -113,6 +113,8 @@ exports.getAllUsers = (req, res, next) => {
        res.status(200).json(users);
      })
      .catch((error) => {
+      console.log("========CATCH get all USERS ========");
+
        res.status(400).json({
          error: error,
        });

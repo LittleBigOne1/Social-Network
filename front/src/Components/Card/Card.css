@@ -17,14 +17,18 @@
     margin-bottom: 10px;
 }
 
-.card p {
+.card-text p {
     font-size: 18px;
+    padding: 10px 30px;
+    text-align: justify;
 }
-.pp{
+
+.pp {
     padding: 0 10px;
 }
+
 .pp img {
-    
+
     border-radius: 50%;
     background-color: #fff;
     height: 50px;
@@ -33,23 +37,26 @@
 
 .card-img {
     width: 100%;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .card-img img {
     width: 100%;
-    background: #000;
+    background-color: rgb(255, 255, 255);
 }
+
 
 .card-pp-name {
     display: flex;
 }
-.name-time{
+
+.name-time {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-.timeStamp{
+
+.timeStamp {
     padding-top: 2px;
     font-size: 12px;
     font-style: italic;

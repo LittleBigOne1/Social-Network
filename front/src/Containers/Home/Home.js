@@ -7,66 +7,61 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
+// axios configuration
+axios.defaults.baseURL = 'http://localhost:8000/api';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.timeout = 6000;
+axios.defaults.withCredentials = true;
+
 export default function Home() {
    const [postsData, setPostsData] = useState([]);
    const [allUsers, setAllUsers] = useState([]);
    const [error, setError] = useState([]);
    const [cookies, setCookie] = useCookies([]);
    //const userIdCookie = cookies.userId.split('').reverse().join('');
-   const navigate = useNavigate;
+   const navigate = useNavigate();
    // console.log('token  ==>', cookies.token);
    // console.log('postData  ==>', postsData);
-
+   console.log('allUsers', allUsers);
    useEffect(() => {
       axios
-         .get('http://localhost:3000/api/auth/info')
+         .get('/auth/info')
          .then((data) => {
             // console.log('data axios', data.data);
             const allUsers = data.data;
-            // console.log(allUsers);
+            console.log('allUsers', allUsers);
             setAllUsers(allUsers);
             // -------- mettre dans une fonction -------
             axios
-               .get('http://localhost:3000/api/posts', {
-                  headers: { Authorization: 'bearer ' + cookies.token },
-               })
+               .get('/posts')
                .then((data) => {
                   // console.log('data axios', data.data);
 
                   setPostsData(data.data);
                })
                .catch((err) => {
+                  navigate('/login', { replace: true });
                   console.log('catch axios allPosts==> ', err);
                   setError(err);
-                  navigate('/login');
                });
             //-------------------------------
          })
          .catch((err) => {
-            console.log('catch axios allUsers ==> ', err);
+            console.log('allUsers', allUsers);
+
+            navigate('/login', { replace: true });
+
+            // console.log('catch axios allUsers ==> ', err);
          });
-      // fetch('http://localhost:3000/api/posts', {
-      //    headers: { Authorization: 'bearer ' + 'token a remplir !!' },
-      // })
    }, []);
-   // ----- récupérer les users avec un axios
-   // Array.prototype.find() pour trouver le nom de l'auteur du post en fonction de son id"
 
-   // useEffect(() => {
-   //   ;
-   // }, []);
-   // console.log(allUsers);
-   // const { data, loading, error } = useFetch('http://localhost:3000/api/posts');
-   // console.log(data, loading, error);
-   // console.log(error);
-   useEffect(() => {}, []);
+   // useEffect(() => {}, []);
 
-   if (postsData.error) {
-      console.log('if error');
-      navigate('/login');
-   } else {
+   // if (postsData.error || allUsers == null) {
+   //    console.log('if error');
+   //    navigate('/login');
+   // } else {
       return (
-         // ---- ajouter une fonction d'affichage selon si connecté ou pas ----
          <>
             <CreatePost />
             <h1 className="home-title">Tous les articles</h1>
@@ -78,7 +73,7 @@ export default function Home() {
                      );
                      return (
                         <Card
-                           xmessage={item.message}
+                           message={item.message}
                            key={item._id}
                            id={item._id}
                            createdAt={item.createdAt}
@@ -97,5 +92,5 @@ export default function Home() {
             </div>
          </>
       );
-   }
+   // }
 }

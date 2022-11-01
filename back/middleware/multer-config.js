@@ -19,4 +19,4 @@ const storage = multer.diskStorage({
   },
 });
 
-module.exports = multer({ storage: storage }).single('image'); // précise qu'on ne peut envoyer les fichiers que 1 par 1
+module.exports = multer({ storage: storage }).single('file'); // précise qu'on ne peut envoyer les fichiers que 1 par 1

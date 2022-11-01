@@ -15,8 +15,7 @@ export default function Login(props) {
 
    const handleForm = (e) => {
       e.preventDefault();
-      //  console.log(e.target[0].value);
-      // console.log(e.target[1].value);
+
       try {
          const userInfo = {
             email: e.target['email'].value,
@@ -24,7 +23,7 @@ export default function Login(props) {
          };
 
          axios
-            .post('http://localhost:3000/api/auth/login', userInfo)
+            .post('http://localhost:8000/api/auth/login', userInfo)
             .then((data) => {
                console.log(data);
 
@@ -43,7 +42,7 @@ export default function Login(props) {
             })
             .then(() => {
                console.log('avant navigate login');
-               // navigate('/')
+               navigate('/')
             })
             .catch((err) => {
                console.log('catch axios post login', err);

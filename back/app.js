@@ -8,34 +8,44 @@ const dotenv = require('dotenv'); // module sans dépendance qui charge les vari
 dotenv.config();
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
+cors = require('cors');
+const corsOptions = {
+   origin: 'http://localhost:3000',
+   credentials: true,
+   allowedHeaders: ['sessionId', 'Content-Type'],
+   exposedHeaders: ['sessionId'],
+   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+   preflightContinue: false,
+};
 //console.log(process.env);
 // connexion à MongoDB
 
 mongoose
-  .connect(process.env.MDB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
+   .connect(process.env.MDB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+   })
+   .then(() => console.log('Connexion à MongoDB réussie !'))
+   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 const app = express();
 app.use(express.json());
 // app.use(dotenv)
 
 // CORS:  partage de ressources entre serveurs
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
-  );
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET, POST, PUT, DELETE, PATCH, OPTIONS'
-  );
-  next();
-});
+// app.use((req, res, next) => {
+//    res.setHeader('Access-Control-Allow-Origin', '*');
+//    res.setHeader(
+//       'Access-Control-Allow-Headers',
+//       'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
+//    );
+//    res.setHeader(
+//       'Access-Control-Allow-Methods',
+//       'GET, POST, PUT, DELETE, PATCH, OPTIONS'
+//    );
+//    next();
+// });
+app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(helmet());

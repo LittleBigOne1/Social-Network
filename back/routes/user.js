@@ -8,5 +8,5 @@ router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.get('/logout', auth, userCtrl.logout); // peut etre géré depuis le front <==== mais plus sécurisé
 
-router.get('/info/', userCtrl.getAllUsers)
+router.get('/info/', auth, userCtrl.getAllUsers)
 module.exports = router;

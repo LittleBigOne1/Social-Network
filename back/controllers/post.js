@@ -4,13 +4,14 @@ const userModel = require('../models/user');
 const commentModel = require('../models/comment');
 
 // export de la fonction de création d'un post
-
-// export de la fonction de création d'un post
-exports.createPost = (req, res, next) => {
+exports.createPost = (req, res) => {
+   console.log('REQ PARAMS', req.params);
+   console.log('REQ BODY =>', req.body);
+   // console.log('REQ FILE =>', req.file.filename);
+   console.log('------ STARTING ALGORITHM ------');
    const postObject = req.body;
-   console.log('---- req.body.file ----', req.file);
-   if (req.body.file) {
-      console.log('---------lol');
+   if (req.file) {
+      console.log('IF REQ.FILE');
       const post = new postModel({
          ...postObject,
          imageUrl: `${req.protocol}://${req.get('host')}/images/${
@@ -18,7 +19,7 @@ exports.createPost = (req, res, next) => {
          }`,
       });
       post
-         .save() // sauvegarde du post dans la base de donnée
+         .save()
          .then(() => {
             res.status(201).json({ message: 'Post crée !' });
          })
@@ -26,15 +27,13 @@ exports.createPost = (req, res, next) => {
             res.status(400).json({ error });
          });
    } else {
-      console.log(req.body);
-
+      console.log('REQ.FILE = FALSE');
       const post = new postModel({
-         // création d'un objet post à partir du model Post
          ...postObject,
       });
 
       post
-         .save() // sauvegarde du post dans la base de donnée
+         .save()
          .then(() => {
             res.status(201).json({ message: 'Post crée !' });
          })
@@ -42,52 +41,8 @@ exports.createPost = (req, res, next) => {
             res.status(400).json({ error });
          });
    }
-   // console.log('-----------',req.body);
-   // console.log('----- postObject',postObject);
-   // const postObject = req.body
-   //    // .post
-
-   // // delete postObject._id;
-   // // delete postObject._userId;
-   // // si post sans img
-   // if (req.file) {
-   //    console.log('------ if');
-   //    const post = new postModel({
-   //       // création d'objet post à partir du model Post
-   //       ...postObject,
-   //       userId: req.auth.userId,
-   //       imageUrl: `${req.protocol}://${req.get('host')}/images/${
-   //          req.file.filename
-   //       }`,
-   //    });
-
-   //    post
-   //       .save() // sauvegarde du post dans la base de donnée
-   //       .then(() => {
-   //          res.status(201).json({ message: 'Post crée !' });
-   //       })
-   //       .catch((error) => {
-   //          console.log('-------> catch  <------');
-   //          res.status(400).json({ error });
-   //       });
-   // } else {
-   //    console.log('------- else');
-   //    const post = new postModel({
-   //       // création d'un objet post à partir du model Post
-   //       ...postObject,
-   //       userId: req.auth.userId,
-   //    });
-
-   //    post
-   //       .save() // sauvegarde du post dans la base de donnée
-   //       .then(() => {
-   //          res.status(201).json({ message: 'Post crée !' });
-   //       })
-   //       .catch((error) => {
-   //          res.status(400).json({ error });
-   //       });
-   // }
 };
+
 
 // export de la fonction d'affichage d'un post
 exports.getOnePost = (req, res, next) => {
@@ -159,6 +114,7 @@ exports.getAllPosts = (req, res, next) => {
          res.status(200).json(posts);
       })
       .catch((error) => {
+         console.log("========CATCH get all post ========");
          res.status(400).json({ error: error });
       });
 };
@@ -191,6 +147,8 @@ exports.deletePost = (req, res, next) => {
 };
 exports.likeOrNot = (req, res, next) => {
    // retourne le seul post ayant pour identifiant celui indiqué en paramètre
+   // console.log(req);
+   console.log('------- je suis dans la fonction like ------');
    postModel
       .findOne({ _id: req.params.id })
       .then((post) => {
