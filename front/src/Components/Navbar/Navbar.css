@@ -27,20 +27,18 @@ nav a {
     color: #f1f1f1;
     cursor: pointer;
 }
-
-svg {
-    display: none;
+.logout{
     position: absolute;
     right: 10px;
-    top: 7px;
-    padding: 7px;
-    cursor: pointer;
-    fill: #f1f1f1;
+    top: 9px;
+    height: 100%;
+    width: 30px;
 }
+
 .activeLink{
     font-weight: bold;
 }
-@media screen and (max-width: 500px) {
+/* @media screen and (max-width: 500px) {
 
     .liste {
         flex-direction: column;
@@ -63,4 +61,4 @@ svg {
     svg {
         display: block;
     }
-}
+} */

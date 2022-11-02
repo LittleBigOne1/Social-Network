@@ -11,7 +11,6 @@ axios.defaults.withCredentials = true;
 export default function CreatePost(props) {
    const [cookies, setCookie] = useCookies([]);
    const [file, setFile] = useState(null);
-   console.log('init =>', file);
 
    const userIdCookie =
       cookies.userId && cookies.userId.split('').reverse().join('');
@@ -25,7 +24,6 @@ export default function CreatePost(props) {
       if (file !== null) {
          formData.append('file', file);
       }
-      console.log(formData);
       try {
          await axios.post('/posts/', formData, {
             headers: {
@@ -42,7 +40,6 @@ export default function CreatePost(props) {
    const handleFile = (e) => {
       setFile(e.target.files[0]);
    };
-   console.log('find script =>', file);
 
    return (
       cookies.userId && (

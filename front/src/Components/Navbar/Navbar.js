@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import './Navbar.css';
-import Logo from '../../assets/icon-left-font-monochrome-white.png'
+import Logo from '../../assets/images/icon-left-font-monochrome-white.png'
+import LogOut from '../LogOut/LogOut'
 
 export default function Navbar() {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -25,9 +26,9 @@ export default function Navbar() {
   return (
     <>
       <nav>
-        {(toggleMenu || largeur > 500) && (
+        {/* {(toggleMenu || largeur > 500) && ( */}
           <div className="liste">
-            
+
             <NavLink
               // className={({ isActive }) =>
               //   isActive ? 'activeLink items' : 'items'
@@ -52,13 +53,14 @@ export default function Navbar() {
             >
               Contact
             </NavLink>
+            
+
+
           </div>
-        )}
-        <svg onClick={toggleNav} viewBox="0 0 100 80" width="40" height="40">
-          <rect width="100" height="20"></rect>
-          <rect y="30" width="100" height="20"></rect>
-          <rect y="60" width="100" height="20"></rect>
-        </svg>
+              <div className='logout'>
+              <LogOut/>
+              </div>
+        
       </nav>
     </>
   );

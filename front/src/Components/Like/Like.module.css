@@ -1,6 +1,12 @@
-img {
-    width: 30px;
+.likeButton {
+    /* width: 30px; */
+    height: 70%;
     cursor: pointer;
-    margin: 4px 0;
-
+    padding: 0 5px 0 10px;
+}
+.likeArea{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

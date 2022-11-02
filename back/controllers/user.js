@@ -83,8 +83,8 @@ exports.login = (req, res, next) => {
 //
 exports.logout = (req, res, next) => {
    res.clearCookie('token');
+   res.clearCookie('userId');
    res.status(200).json({ message: 'déconnexion' });
-   return res.redirect('/');
 };
 
 exports.getUserInfo = (req, res, next) => {

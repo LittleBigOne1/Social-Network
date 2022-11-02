@@ -25,8 +25,6 @@ export default function Login(props) {
          axios
             .post('http://localhost:8000/api/auth/login', userInfo)
             .then((data) => {
-               console.log(data);
-
                setCookie('token', data.data.token, {
                   path: '/',
                   maxAge: maxAge,
@@ -41,7 +39,6 @@ export default function Login(props) {
                );
             })
             .then(() => {
-               console.log('avant navigate login');
                navigate('/')
             })
             .catch((err) => {

@@ -22,14 +22,13 @@ export default function Home() {
    const navigate = useNavigate();
    // console.log('token  ==>', cookies.token);
    // console.log('postData  ==>', postsData);
-   console.log('allUsers', allUsers);
+   console.log(document.cookie);
    useEffect(() => {
       axios
          .get('/auth/info')
          .then((data) => {
             // console.log('data axios', data.data);
             const allUsers = data.data;
-            console.log('allUsers', allUsers);
             setAllUsers(allUsers);
             // -------- mettre dans une fonction -------
             axios
