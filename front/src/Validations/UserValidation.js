@@ -25,6 +25,6 @@ export const userSchema = yup.object().shape({
       .string()
       .oneOf(
          [yup.ref('password'), null],
-         'Le mot de passe de confirmation ne correspond pas'
+         'Les mots de passe ne correspondent pas'
       ),
 });

@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { userSchema } from '../../Validations/UserValidation';
+
+import axios from 'axios';
+axios.defaults.baseURL = 'http://localhost:8000/api';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+axios.defaults.timeout = 6000;
+axios.defaults.withCredentials = true;
 
 export default function Signup() {
    const navigate = useNavigate();
@@ -11,11 +16,12 @@ export default function Signup() {
       mode: 'onBlur',
       resolver: yupResolver(userSchema),
    });
+
    const { errors } = formState;
    const onSubmit = (data) => {
       console.log(data);
       axios
-         .post('http://localhost:3000/api/auth/signup', data)
+         .post('/auth/signup', data)
          .then((response) => {
             console.log(response);
             console.log(response.status);
@@ -109,7 +115,7 @@ export default function Signup() {
                {...register('confirmPassword')}
             ></input>
             <small>{errors.confirmPassword?.message}</small>
-            <button>Se connecter</button>
+            <button>S'inscrire</button>
          </form>
          <div className="signup"></div>
          <p>

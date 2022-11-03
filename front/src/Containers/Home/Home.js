@@ -22,7 +22,7 @@ export default function Home() {
    const navigate = useNavigate();
    // console.log('token  ==>', cookies.token);
    // console.log('postData  ==>', postsData);
-   console.log(document.cookie);
+
    useEffect(() => {
       axios
          .get('/auth/info')
@@ -84,6 +84,7 @@ export default function Home() {
                            firstName={user.firstName}
                            lastName={user.lastName}
                            pp={user.profilePicture}
+                           isAdmin={user.isAdmin}
                         />
                      );
                   })

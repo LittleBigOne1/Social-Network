@@ -7,11 +7,10 @@ import useAxiosPost from '../../useAxiosPost';
 // import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
-axios.defaults.baseURL = 'http://localhost:3000/api';
+axios.defaults.baseURL = 'http://localhost:8000/api';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 axios.defaults.timeout = 6000;
 axios.defaults.withCredentials = true;
-// import {ReactComponent as likeButton} from '../../assets/likeButton.svg'
 
 export default function Like(props) {
   const usersLiked = props.usersLiked;

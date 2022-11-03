@@ -11,7 +11,9 @@
     flex-direction: column;
     justify-content: space-between;
 }
-
+.card__header{
+    display: flex;
+}
 .card h2 {
     font-size: 25px;
     margin-bottom: 10px;
@@ -31,10 +33,24 @@
 
     border-radius: 50%;
     background-color: #fff;
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
 }
+.card__header__settings{
+    background-color: rgb(255, 230, 0);
+    width: 15%;
+    display: flex;
+    justify-content: space-between;
+}
+.editButton{
+    cursor: pointer;
+    width: 30px;
 
+}
+.closeButton{
+    cursor: pointer;
+    width: 30px;
+}
 .card-img {
     width: 100%;
     object-fit: cover;
@@ -69,8 +85,9 @@
 
 
 
-.card-pp-name {
+.card__header__pp_name {
     display: flex;
+    width: 85%;
 }
 
 .name-time {

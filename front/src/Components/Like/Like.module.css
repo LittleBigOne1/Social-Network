@@ -4,7 +4,8 @@
     cursor: pointer;
     padding: 0 5px 0 10px;
 }
-.likeArea{
+
+.likeArea {
     height: 100%;
     display: flex;
     justify-content: center;
