@@ -1,4 +1,4 @@
-import React ,{useState} from 'react';
+import React, { useState } from 'react';
 import styles from './EditPost.module.css';
 import { useCookies } from 'react-cookie';
 
@@ -9,40 +9,30 @@ axios.defaults.timeout = 6000;
 axios.defaults.withCredentials = true;
 
 export default function EditPost(props) {
-//   console.log(props);
+  //   console.log(props);
   const [cookies, setCookie] = useCookies([]);
-  const userIdCookie = cookies.userId && cookies.userId.split('').reverse().join('');
+  const userIdCookie =
+    cookies.userId && cookies.userId.split('').reverse().join('');
   const [file, setFile] = useState(null);
 
   const handleFormPost = async (e) => {
     e.preventDefault();
-   console.log(e.target)
+
     const formData = new FormData();
-    formData.append('userId', userIdCookie);
+    console.log(formData);
     formData.append('message', e.target['message'].value);
     if (file !== null) {
       formData.append('file', file);
     }
     try {
-      console.log(formData);
-      await axios.put(
-        `/posts/${props.id}`,
-        formData
-        //  {
-        //    headers: {
-        //       'Content-Type': 'multipart/form-data',
-        //    },
-        // }
-      );
-      // .then(navigate('/'))
-      // window.location.reload();
-      // navigate('/')
-
-      // e.target['message'].value = '';
-      // setFile(null);
+      await axios.put(`/posts/${props.id}`, formData);
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const handleFile = (e) => {
+    setFile(e.target.files[0]);
   };
   return (
     <div>
@@ -57,7 +47,7 @@ export default function EditPost(props) {
         ></textarea>
         {/* <img src={props.url} alt="" /> */}
         <input
-          // onChange={handleFile}
+          onChange={handleFile}
           accept=".jpg, .jpeg, .png"
           id="file"
           name="file"

@@ -84,7 +84,6 @@ export default function Home() {
                            firstName={user.firstName}
                            lastName={user.lastName}
                            pp={user.profilePicture}
-                           isAdmin={user.isAdmin}
                         />
                      );
                   })

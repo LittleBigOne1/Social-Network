@@ -25,14 +25,12 @@ export default function Card(props) {
 
   // cookies
   const [cookies, setCookie] = useCookies([]);
-
   const userIdCookie = cookies.userId.split('').reverse().join('');
 
   const isAdmin = () => {
     axios
       .get('/auth/isadmin/' + userIdCookie)
       .then((data) => {
-        console.log(data.data);
         return data.data;
       })
       .catch(() => {
@@ -41,13 +39,13 @@ export default function Card(props) {
   };
 
   const [displaySettings, setDisplaySettings] = useState(() => {
-    if (userIdCookie === props.userId || isAdmin) {
+    if (userIdCookie === props.userId || isAdmin()) {
       return true;
     } else {
       return false;
     }
   });
-
+  console.log(displaySettings);
   const allUsers = props.allUsers;
   useEffect(() => {
     const user = allUsers.find((element) => element._id === props.userId);

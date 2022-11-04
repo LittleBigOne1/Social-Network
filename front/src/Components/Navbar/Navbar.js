@@ -26,7 +26,7 @@ export default function Navbar() {
   return (
     <>
       <nav>
-        {/* {(toggleMenu || largeur > 500) && ( */}
+       
           <div className="liste">
 
             <NavLink
@@ -35,30 +35,15 @@ export default function Navbar() {
               // }
               to="/"
             >
-              Accueil
+              <img className='logo' src={Logo} alt="" />
             </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? 'activeLink items' : 'items'
-              }
-              to="/publier/"
-            >
-              Publier
-            </NavLink>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? 'activeLink items' : 'items'
-              }
-              to="/"
-            >
-              Contact
-            </NavLink>
+            
             
 
 
           </div>
               <div className='logout'>
-              <LogOut/>
+              <LogOut className ='logoutButton'/>
               </div>
         
       </nav>

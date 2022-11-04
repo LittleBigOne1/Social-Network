@@ -20,7 +20,8 @@ textarea {
     border-radius: 10px;
     border: 2px solid rgba(0, 0, 0, 0.626);
     resize: none;
-    overflow: hidden;
+    overflow-y: scroll;
+    height: fit-content;
 
 
 }

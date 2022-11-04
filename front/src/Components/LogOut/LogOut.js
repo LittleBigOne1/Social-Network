@@ -18,7 +18,7 @@ export default function LogOut() {
 
    return (
       <>
-        <img onClick={handleLogout} className='' src={Logout} alt='Se déconnecter' />
+        <img onClick={handleLogout} className={styles.logout} src={Logout} alt='Se déconnecter' />
          {/* <p onClick={handleLogout}>Se déconnecter</p> */}
          {/* <Logout /> */}
         

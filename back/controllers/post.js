@@ -2,10 +2,10 @@ const postModel = require('../models/post'); // import du modèle Post
 const fs = require('fs'); // import du module file system, package qui permet de modifier et/ou supprimer des fichiers
 const userModel = require('../models/user');
 const commentModel = require('../models/comment');
+const post = require('../models/post');
 
 // export de la fonction de création d'un post
 exports.createPost = (req, res) => {
-  
   const postObject = req.body;
   if (req.file) {
     console.log('IF REQ.FILE');
@@ -60,51 +60,34 @@ exports.getOnePost = (req, res, next) => {
 
 // export de la fonction de modification d'un post
 
-exports.updatePost = (req, res, next) => {
-  console.log('entrée updatePost');
-  console.log('--------',req.body);
-  const postObject = req.file // ternaire pour vérifier si la requête contient un ficher ou non et effectué une action pour les deux possibilités
+exports.updatePost = (req, res) => {
+  const postObject = req.file
     ? {
-      
-        // si changement de photo:
-        ...JSON.parse(req.body.post),
+        ...req.body,
         imageUrl: `${req.protocol}://${req.get('host')}/images/${
           req.file.filename
         }`,
       }
-    : { ...req.body }; // si photo inchangée
+    : { ...req.body };
+  req.file &&
+    postModel.findOne({ _id: req.params.id }).then((post) => {
+      console.log('POST ======>', post);
+      if (post.imageUrl) {
+        const filename = post.imageUrl.split('/images/')[1];
+        console.log(filename);
+        fs.unlink(`images/${filename}`, (error) => {
+          if (error) throw error;
+        });
+      }
+    });
 
-  delete postObject._userId;
-  // retourne le seul post ayant pour identifiant celui indiqué en paramètre
-  userModel.findOne({ _id: req.auth.userId }).then((user) => {
-    postModel
-      .findOne({ _id: req.params.id })
-      .then((post) => {
-        if (post.userId === req.auth.userId || user.isAdmin === true) {
-          // suppression de l'ancienne image (son fichier
-          const filename = post.imageUrl.split('/images/')[1];
-          fs.unlink(`images/${filename}`, (error) => {
-            if (error) throw error;
-          });
-          // mets à jour la base donnée en modifiant les caractéristiques ou l'image du post
-          postModel
-            .updateOne(
-              { _id: req.params.id },
-              { ...postObject, _id: req.params.id }
-            )
-            .then(() => res.status(200).json({ message: 'Objet modifié!' }))
-            .catch((error) => res.status(401).json({ error }));
-        } else {
-          res.status(403).json({ message: 'Not authorized' });
-        }
-      })
-      .catch((error) => {
-        res.status(400).json({ error });
-      });
-  });
+  postModel
+    .updateOne({ _id: req.params.id }, { ...postObject, _id: req.params.id })
+    .then(() => res.status(201).json({ message: 'Post updated' }))
+    .catch((error) => {
+      res.status(400).json({ error });
+    });
 };
-
-
 
 // avant test (ancienne fonction) ---------------------------
 
@@ -172,7 +155,7 @@ exports.deletePost = (req, res, next) => {
       .then((post) => {
         console.log('----- post -------', post);
         console.log('----- req.auth.userId -------', req.auth.userId);
-        if (post.userId === req.auth.userId || user.isAdmin === true) {
+        if (post.userId === req.auth.userId || user.isAdmin) {
           if (post.imageUrl) {
             const filename = post.imageUrl.split('/images/')[1];
             console.log('-------- filename --------', filename);
