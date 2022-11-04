@@ -18,7 +18,9 @@
     font-size: 25px;
     margin-bottom: 10px;
 }
-
+.displayNone{
+    display: none;
+}
 .card-text p {
     font-size: 18px;
     padding: 10px 30px;

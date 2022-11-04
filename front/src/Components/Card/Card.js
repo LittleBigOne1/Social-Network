@@ -3,6 +3,7 @@ import Moment from 'react-moment';
 import Like from '../Like/Like';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import EditPost from '../EditPost/EditPost';
 
 import './Card.css';
 import Close from '../../assets/images/Close-icon.svg';
@@ -15,19 +16,15 @@ axios.defaults.withCredentials = true;
 
 // import PP from "./default_profil_picture_user.png";
 export default function Card(props) {
-
-   // states
+  // states
   const [totalLikes, setTotalLikes] = useState(props.likes);
   const [postId, setPostId] = useState(props.id);
   const [usersLiked, setUsersLiked] = useState(props.usersLiked);
   const [userData, setDataUser] = useState([]);
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(false);
 
   // cookies
   const [cookies, setCookie] = useCookies([]);
-
-
-
 
   const userIdCookie = cookies.userId.split('').reverse().join('');
 
@@ -69,42 +66,36 @@ export default function Card(props) {
         console.log('catch axios deletePost', err);
       });
   };
-//   const editPost = () => {
-//    console.log('edit post');
-//    axios.put(`/posts/${props.id}`,{})
+  //   const editPost = () => {
+  //    console.log('edit post');
+  //    axios.put(`/posts/${props.id}`,{})
 
-//   };
-const toggleModal = () => {
-   setModal(!modal)
-   
-}
+  //   };
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+  // <div className="overlay">
+  //    <div className="modal">
+  //       <div className="modal_content">
+  //          <h2>Que voulez-vous modifier ?</h2>
+  //          <textarea name="" id="" cols="30" rows="10" defaultValue={props.message}></textarea>
+  //          {/* <img src={props.url} alt="" /> */}
+  //          <input
+  //             // onChange={handleFile}
+  //             accept=".jpg, .jpeg, .png"
+  //             id="file"
+  //             name="file"
+  //             className="input__file "
+  //             type="file"
+  //          />
+  //          <button>Annuler</button>
+  //          <button>Valider</button>
+  //       </div>
+  //    </div>
+  // </div>
 
   return (
-   
     <div className="card">
-
-
-      <div className="overlay">
-         <div className="modal">
-            <div className="modal_content">
-               <h2>Que voulez-vous modifier ?</h2>
-               <textarea name="" id="" cols="30" rows="10" defaultValue={props.message}></textarea>
-               {/* <img src={props.url} alt="" /> */}
-               <input
-                  // onChange={handleFile}
-                  accept=".jpg, .jpeg, .png"
-                  id="file"
-                  name="file"
-                  className="input__file "
-                  type="file"
-               />
-               <button>Annuler</button>
-               <button>Valider</button>
-            </div>
-         </div>
-      </div>
-
-
       <div className="card__header">
         <div className="card__header__pp_name">
           <div className="pp">
@@ -136,17 +127,18 @@ const toggleModal = () => {
           </div>
         )}
       </div>
-
-      <div className="card-text">
+      {modal && <EditPost message={props.message} id={props.id} />}
+      <div className={modal ? 'displayNone' : 'card-text'}>
         <p>{props.message}</p>
       </div>
       {props.url && (
-        <div className="card-img">
+        <div className={modal ? 'displayNone' : 'card-img'}>
           <img src={props.url} alt="image du post" />
         </div>
       )}
 
-      <div className="likeComment">
+      {/* <div className="likeComment"> */}
+      <div className={modal ? 'displayNone' : 'likeComment'}>
         <div className="likes">
           <Like likes={totalLikes} id={postId} usersLiked={usersLiked} />
         </div>

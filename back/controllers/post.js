@@ -59,9 +59,13 @@ exports.getOnePost = (req, res, next) => {
 };
 
 // export de la fonction de modification d'un post
+
 exports.updatePost = (req, res, next) => {
+  console.log('entrée updatePost');
+  console.log('--------',req.body);
   const postObject = req.file // ternaire pour vérifier si la requête contient un ficher ou non et effectué une action pour les deux possibilités
     ? {
+      
         // si changement de photo:
         ...JSON.parse(req.body.post),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${
@@ -99,6 +103,53 @@ exports.updatePost = (req, res, next) => {
       });
   });
 };
+
+
+
+// avant test (ancienne fonction) ---------------------------
+
+// exports.updatePost = (req, res, next) => {
+//   const postObject = req.file // ternaire pour vérifier si la requête contient un ficher ou non et effectué une action pour les deux possibilités
+//     ? {
+//         // si changement de photo:
+//         ...JSON.parse(req.body.post),
+//         imageUrl: `${req.protocol}://${req.get('host')}/images/${
+//           req.file.filename
+//         }`,
+//       }
+//     : { ...req.body }; // si photo inchangée
+
+//   delete postObject._userId;
+//   // retourne le seul post ayant pour identifiant celui indiqué en paramètre
+//   userModel.findOne({ _id: req.auth.userId }).then((user) => {
+//     postModel
+//       .findOne({ _id: req.params.id })
+//       .then((post) => {
+//         if (post.userId === req.auth.userId || user.isAdmin === true) {
+//           // suppression de l'ancienne image (son fichier
+//           const filename = post.imageUrl.split('/images/')[1];
+//           fs.unlink(`images/${filename}`, (error) => {
+//             if (error) throw error;
+//           });
+//           // mets à jour la base donnée en modifiant les caractéristiques ou l'image du post
+//           postModel
+//             .updateOne(
+//               { _id: req.params.id },
+//               { ...postObject, _id: req.params.id }
+//             )
+//             .then(() => res.status(200).json({ message: 'Objet modifié!' }))
+//             .catch((error) => res.status(401).json({ error }));
+//         } else {
+//           res.status(403).json({ message: 'Not authorized' });
+//         }
+//       })
+//       .catch((error) => {
+//         res.status(400).json({ error });
+//       });
+//   });
+// };
+
+// ----------------------------------------------------------
 
 // export de la fonction d'affichage de tous les posts
 exports.getAllPosts = (req, res, next) => {

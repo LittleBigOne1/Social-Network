@@ -3,6 +3,9 @@ import './CreatePost.module.css';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
+import { useNavigate } from 'react-router-dom';
+
+
 // axios.defaults.baseURL='http://localhost:8000/api'
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 // axios.defaults.timeout=6000
@@ -11,6 +14,8 @@ axios.defaults.withCredentials = true;
 export default function CreatePost(props) {
   const [cookies, setCookie] = useCookies([]);
   const [file, setFile] = useState(null);
+
+  const navigate = useNavigate();
 
   const userIdCookie =
     cookies.userId && cookies.userId.split('').reverse().join('');
@@ -33,8 +38,10 @@ export default function CreatePost(props) {
         //       'Content-Type': 'multipart/form-data',
         //    },
         // }
-      );
-      window.location.reload();
+      )
+         // .then(navigate('/'))
+       window.location.reload();
+      // navigate('/')
 
       // e.target['message'].value = '';
       // setFile(null);
