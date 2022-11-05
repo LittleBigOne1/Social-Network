@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styles from './Like.module.css';
 import axios from 'axios';
 import likeButton from '../../assets/images/likeButton.svg';
+import likeButtonRed from '../../assets/images/likeButtonRed.svg';
+
 import AxiosPost from '../../useAxiosPost';
 import useAxiosPost from '../../useAxiosPost';
-// import { useParams } from 'react-router-dom';
+
 import { useCookies } from 'react-cookie';
 
 axios.defaults.baseURL = 'http://localhost:8000/api';
@@ -76,20 +78,26 @@ export default function Like(props) {
           console.log('catch axios post undo like', err);
         });
     }
-
-    // !toggle ?  setLikeCounter(likeCounter + 1), setToggle(!toggle) : setLikeCounter(likeCounter - 1),
-    // setToggle(!toggle);
-    // console.log('fin addLike, toogle:',toggle);
   };
 
   return (
     <div className={styles.likeArea}>
-      <img
-        src={likeButton}
-        alt="likeButton"
-        className={styles.likeButton}
-        onClick={addLike}
-      />
+      {toggle ? (
+        <img
+          src={likeButtonRed}
+          alt="likeButton"
+          className={styles.likeButton}
+          onClick={addLike}
+        />
+      ) : (
+        <img
+          src={likeButton}
+          alt="likeButton"
+          className={styles.likeButton}
+          onClick={addLike}
+        />
+      )}
+
       <span>{likeCounter}</span>
     </div>
   );

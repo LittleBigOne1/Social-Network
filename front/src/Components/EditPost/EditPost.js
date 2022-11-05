@@ -9,7 +9,6 @@ axios.defaults.timeout = 6000;
 axios.defaults.withCredentials = true;
 
 export default function EditPost(props) {
-  //   console.log(props);
   const [cookies, setCookie] = useCookies([]);
   const userIdCookie =
     cookies.userId && cookies.userId.split('').reverse().join('');
@@ -54,7 +53,7 @@ export default function EditPost(props) {
           className="input__file "
           type="file"
         />
-        <button>Annuler</button>
+        <button onClick={props.toggleModal}>Annuler</button>
         <button>Valider</button>
       </form>
     </>

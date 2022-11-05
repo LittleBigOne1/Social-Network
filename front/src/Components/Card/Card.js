@@ -31,13 +31,18 @@ export default function Card(props) {
     axios
       .get('/auth/isadmin/' + userIdCookie)
       .then((data) => {
+        console.log('isAdmin ==========>',data.data);
         return data.data;
       })
       .catch(() => {
         return false;
       });
   };
-
+  console.log('---------------------',isAdmin());
+  console.log('------');
+  console.log('currentUser',userIdCookie);
+  console.log('auteur du post',props.userId);
+  console.log('-------',);
   const [displaySettings, setDisplaySettings] = useState(() => {
     if (userIdCookie === props.userId || isAdmin()) {
       return true;
@@ -45,7 +50,7 @@ export default function Card(props) {
       return false;
     }
   });
-  console.log(displaySettings);
+  console.log('réglages visibles',displaySettings);
   const allUsers = props.allUsers;
   useEffect(() => {
     const user = allUsers.find((element) => element._id === props.userId);
@@ -57,7 +62,7 @@ export default function Card(props) {
       .delete(`/posts/${props.id}`)
       .then((data) => {
         console.log(data);
-        e.target.closest('.card').remove();
+        e.target.closest('#card').remove();
       })
 
       .catch((err) => {
@@ -72,32 +77,13 @@ export default function Card(props) {
   const toggleModal = () => {
     setModal(!modal);
   };
-  // <div className="overlay">
-  //    <div className="modal">
-  //       <div className="modal_content">
-  //          <h2>Que voulez-vous modifier ?</h2>
-  //          <textarea name="" id="" cols="30" rows="10" defaultValue={props.message}></textarea>
-  //          {/* <img src={props.url} alt="" /> */}
-  //          <input
-  //             // onChange={handleFile}
-  //             accept=".jpg, .jpeg, .png"
-  //             id="file"
-  //             name="file"
-  //             className="input__file "
-  //             type="file"
-  //          />
-  //          <button>Annuler</button>
-  //          <button>Valider</button>
-  //       </div>
-  //    </div>
-  // </div>
-
+ 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} id='card'>
       <div className={styles.cardHeader}>
         <div className={styles.cardHeaderPpName}>
           <div className={styles.pp}>
-            <img src={props.url} alt="pp" />
+            <span className={styles.letters}>{props.firstName.split('')[0]}{props.lastName.split('')[0]}</span>
           </div>
           <div className={styles.nameTime}>
             <h4>
@@ -125,7 +111,7 @@ export default function Card(props) {
           </div>
         )}
       </div>
-      {modal && <EditPost message={props.message} id={props.id} />}
+      {modal && <EditPost message={props.message} id={props.id} toggleModal={toggleModal} />}
       <div className={`${modal ? styles.displayNone : styles.cardText}`}>
         <p className={styles.message}>{props.message}</p>
       </div>

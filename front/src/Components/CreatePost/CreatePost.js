@@ -52,7 +52,7 @@ export default function CreatePost(props) {
   const handleFile = (e) => {
     setFile(e.target.files[0]);
   };
-
+console.log(file);
   return (
     cookies.userId && (
       <>
@@ -72,7 +72,6 @@ export default function CreatePost(props) {
             className={styles.inputFile}
             type="file"
           />
-          <img src={file} alt="apercu" />
           <button className={styles.button}>Publier</button>
         </form>
       </>

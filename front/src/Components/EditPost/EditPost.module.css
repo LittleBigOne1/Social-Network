@@ -1,6 +1,12 @@
+.form{
+padding: 0 35px;
+}
+
 .textarea{
-    width: 90%;
+    width: 100%;
     resize: none;
     overflow-y: visible;
-    /* width: 100%; */
+    border-radius: 10px;
+    border: 2px solid var(--color3);
+    padding: 5px;
 }
