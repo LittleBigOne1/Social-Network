@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import './Navbar.css';
+import styles from'./Navbar.module.css';
 import Logo from '../../assets/images/icon-left-font-monochrome-white.png'
 import LogOut from '../LogOut/LogOut'
 
@@ -27,23 +27,18 @@ export default function Navbar() {
     <>
       <nav>
        
-          <div className="liste">
+          <div className={styles.logoContainer}>
 
-            <NavLink
-              // className={({ isActive }) =>
-              //   isActive ? 'activeLink items' : 'items'
-              // }
-              to="/"
-            >
-              <img className='logo' src={Logo} alt="" />
-            </NavLink>
+                
+              <img className={styles.logo} src={Logo} alt="" />
+          
             
             
 
 
           </div>
-              <div className='logout'>
-              <LogOut className ='logoutButton'/>
+              <div className={styles.logout}>
+              <LogOut className ={styles.logoutButton}/>
               </div>
         
       </nav>

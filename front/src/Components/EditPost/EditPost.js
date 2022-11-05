@@ -35,8 +35,8 @@ export default function EditPost(props) {
     setFile(e.target.files[0]);
   };
   return (
-    <div>
-      <form onSubmit={handleFormPost}>
+    <>
+      <form onSubmit={handleFormPost} className={styles.form}>
         <h2>Que voulez-vous modifier ?</h2>
         <textarea
           className={styles.textarea}
@@ -57,6 +57,6 @@ export default function EditPost(props) {
         <button>Annuler</button>
         <button>Valider</button>
       </form>
-    </div>
+    </>
   );
 }

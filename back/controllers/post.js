@@ -2,7 +2,6 @@ const postModel = require('../models/post'); // import du modèle Post
 const fs = require('fs'); // import du module file system, package qui permet de modifier et/ou supprimer des fichiers
 const userModel = require('../models/user');
 const commentModel = require('../models/comment');
-const post = require('../models/post');
 
 // export de la fonction de création d'un post
 exports.createPost = (req, res) => {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './CreatePost.module.css';
+import  styles from './CreatePost.module.css';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
@@ -49,7 +49,6 @@ export default function CreatePost(props) {
       console.log(err);
     }
   };
-
   const handleFile = (e) => {
     setFile(e.target.files[0]);
   };
@@ -57,22 +56,24 @@ export default function CreatePost(props) {
   return (
     cookies.userId && (
       <>
-        <h1>Create post</h1>
-        <form onSubmit={handleFormPost}>
+        <h2 className={styles.title}>Créer un article</h2>
+        <form className={styles.form} onSubmit={handleFormPost}>
           <label htmlFor="message" className="form__title">
             Exprimez-vous !
           </label>
-          <textarea name="message" required />
-          <label htmlFor="file"></label>
+          <textarea className={styles.textarea} name="message" required />
+          
+          <label className={styles.labelFile} htmlFor="file"> Choisissez votre image</label>
           <input
             onChange={handleFile}
             accept=".jpg, .jpeg, .png"
             id="file"
             name="file"
-            className="input__file "
+            className={styles.inputFile}
             type="file"
           />
-          <button>Publier</button>
+          <img src={file} alt="apercu" />
+          <button className={styles.button}>Publier</button>
         </form>
       </>
     )

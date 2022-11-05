@@ -1,4 +1,6 @@
 .textarea{
-    height: fit-content;
-    overflow-y: scroll
+    width: 90%;
+    resize: none;
+    overflow-y: visible;
+    /* width: 100%; */
 }

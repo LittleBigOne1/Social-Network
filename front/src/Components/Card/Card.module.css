@@ -1,17 +1,22 @@
+@import '../../variables.css';
+
 .card {
     width: 70%;
     min-width: 300px;
     max-width: 650px;
-    background: rgb(255, 0, 0);
     margin: 10px;
-    /* cursor: pointer; */
     min-height: 200px;
     text-align: left;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: var(--color2);
+    border: var(--color1) solid 3px;
+    border-radius: 1rem;
+    overflow: hidden;
+
 }
-.card__header{
+.cardHeader{
     display: flex;
 }
 .card h2 {
@@ -21,11 +26,14 @@
 .displayNone{
     display: none;
 }
-.card-text p {
+.cardText {
+    padding: 20px 35px;
+}
+.message {
     font-size: 18px;
-    padding: 10px 30px;
     text-align: justify;
 }
+
 
 .pp {
     padding: 0 10px;
@@ -38,8 +46,8 @@
     height: 40px;
     width: 40px;
 }
-.card__header__settings{
-    background-color: rgb(255, 230, 0);
+.cardHeaderSettings{
+    /* background-color: rgb(255, 230, 0); */
     width: 15%;
     display: flex;
     justify-content: space-between;
@@ -53,12 +61,11 @@
     cursor: pointer;
     width: 30px;
 }
-.card-img {
+.cardImg {
     width: 100%;
-    object-fit: cover;
 }
 
-.card-img img {
+.img {
     width: 100%;
 }
 
@@ -66,33 +73,20 @@
     display: flex;
     padding: 5px;
     height: 50px;
-    background-color: green;
 }
 
 .likes {
-    width: 50%;
-}
-
-.comments {
-    height: 100%;
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: purple;
-    border-radius: 0.2rem;
-    cursor: pointer;
-
+    width: 100%;
 }
 
 
 
-.card__header__pp_name {
+.cardHeaderPpName {
     display: flex;
     width: 85%;
 }
 
-.name-time {
+.nameTime {
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import './Home.css';
+import styles from './Home.module.css';
 import Card from '../../Components/Card/Card';
 import CreatePost from '../../Components/CreatePost/CreatePost';
 // import useFetch from '../../useFetch';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../../Components/Navbar/Navbar';
+
 
 // axios configuration
 axios.defaults.baseURL = 'http://localhost:8000/api';
@@ -62,9 +64,10 @@ export default function Home() {
    // } else {
       return (
          <>
+            <Navbar />
             <CreatePost />
-            <h1 className="home-title">Tous les articles</h1>
-            <div className="container-posts">
+            <h1 className={styles.homeTitle}>Tous les articles</h1>
+            <div className={styles.containerPosts}>
                {postsData
                   .map((item) => {
                      const user = allUsers.find(

@@ -1,6 +1,5 @@
 .likeButton {
-    /* width: 30px; */
-    height: 70%;
+    width: 40px;
     cursor: pointer;
     padding: 0 5px 0 10px;
 }
@@ -10,4 +9,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    /* cursor: pointer; */
 }

@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import EditPost from '../EditPost/EditPost';
 
-import './Card.css';
+import styles from './Card.module.css';
 import Close from '../../assets/images/Close-icon.svg';
 import Edit from '../../assets/images/edit.svg';
 
@@ -93,56 +93,57 @@ export default function Card(props) {
   // </div>
 
   return (
-    <div className="card">
-      <div className="card__header">
-        <div className="card__header__pp_name">
-          <div className="pp">
+    <div className={styles.card}>
+      <div className={styles.cardHeader}>
+        <div className={styles.cardHeaderPpName}>
+          <div className={styles.pp}>
             <img src={props.url} alt="pp" />
           </div>
-          <div className="name-time">
+          <div className={styles.nameTime}>
             <h4>
               {props.firstName} {props.lastName}
             </h4>
-            <Moment className="timeStamp" format=" HH:mm - DD/MM/YY ">
+            <Moment className={styles.timeStamp} format=" HH:mm - DD/MM/YY ">
               {props.createdAt}
             </Moment>
           </div>
         </div>
         {displaySettings && (
-          <div className="card__header__settings">
+          <div className={styles.cardHeaderSettings}>
             <img
               onClick={toggleModal}
               src={Edit}
               alt="bouton de suppression d'article"
-              className="editButton"
+              className={styles.editButton}
             />
             <img
               onClick={deletePost}
               src={Close}
               alt="bouton de suppression d'article"
-              className="closeButton"
+              className={styles.closeButton}
             />
           </div>
         )}
       </div>
       {modal && <EditPost message={props.message} id={props.id} />}
-      <div className={modal ? 'displayNone' : 'card-text'}>
-        <p>{props.message}</p>
+      <div className={`${modal ? styles.displayNone : styles.cardText}`}>
+        <p className={styles.message}>{props.message}</p>
       </div>
       {props.url && (
-        <div className={modal ? 'displayNone' : 'card-img'}>
-          <img src={props.url} alt="image du post" />
+        <div className={`${modal ? styles.displayNone : styles.cardImg}`}>
+          {/* <div className={modal ? 'displayNone' : 'card-img'}> */}
+          <img className={styles.img} src={props.url} alt="image du post" />
         </div>
       )}
 
       {/* <div className="likeComment"> */}
-      <div className={modal ? 'displayNone' : 'likeComment'}>
-        <div className="likes">
+      <div className={`${modal ? styles.displayNone : styles.likeComment}`}>
+        <div className={styles.likes}>
           <Like likes={totalLikes} id={postId} usersLiked={usersLiked} />
         </div>
-        <div className="comments">
+        {/* <div className="comments">
           <p>Commentaires</p>
-        </div>
+        </div> */}
       </div>
     </div>
   );

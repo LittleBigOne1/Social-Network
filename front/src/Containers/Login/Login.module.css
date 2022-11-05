@@ -1,0 +1,40 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color2);
+    border: var(--color1) solid 3px;
+    border-radius: 1rem;
+    width: 300px;
+    /* margin-left: auto;
+    margin-right: auto; */
+    margin: 40px auto 10px auto;
+    padding: 20px 0;
+}
+
+.input {
+    padding: 10px;
+    margin: 10px 0;
+    min-width: 200px;
+    border-radius: 10px;
+    border: none;
+}
+
+.p {
+    text-align: center;
+}
+
+.logo {
+    width: 300px;
+    display: block;
+    margin: 20px auto 0 auto;
+}
+
+.button {
+    padding: 3px 5px;
+    margin-top: 10px;
+    border: var(--color3) solid 2px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    /* background-color: white; */
+}
