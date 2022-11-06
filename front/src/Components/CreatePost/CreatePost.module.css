@@ -23,16 +23,19 @@
 }
 
 .textarea {
+    font-family: lato;
     width: 80%;
     /* min-height: 60px; */
     /* height: auto; */
     margin: 10px;
     padding: 5px;
     border-radius: 10px;
-    border: 2px solid var(--color3);
+    border: none;
+    /* var(--color3); */
     resize: none;
     overflow-y: visible;
     /* height: fit-content; */
+    outline: none;
 
 
 }

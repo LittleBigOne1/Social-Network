@@ -9,11 +9,14 @@ axios.defaults.timeout = 6000;
 axios.defaults.withCredentials = true;
 
 export default function EditPost(props) {
+
+  
+
   const [cookies, setCookie] = useCookies([]);
   const userIdCookie =
     cookies.userId && cookies.userId.split('').reverse().join('');
   const [file, setFile] = useState(null);
-
+  
   const handleFormPost = async (e) => {
     e.preventDefault();
 

@@ -19,8 +19,16 @@
     border-radius: 10px;
     border: none;
 }
-
-.p {
+.loginError{
+    color: red;
+    text-align: center;
+    font-size: 12px;
+}
+.signupError{
+    color: red;
+    font-size: 12px;
+}
+.switchPage {
     text-align: center;
 }
 

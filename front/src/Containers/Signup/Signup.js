@@ -50,7 +50,7 @@ export default function Signup() {
           placeholder="Prénom"
           {...register('firstName')}
         />
-        <small> {errors.firstName?.message} </small>
+        <p className={styles.signupError}> {errors.firstName?.message} </p>
         <input
           name="lastName"
           type="text"
@@ -59,7 +59,7 @@ export default function Signup() {
           required
           {...register('lastName')}
         />
-        <small> {errors.lastName?.message} </small>
+        <p className={styles.signupError}> {errors.lastName?.message} </p>
         <input
           name="email"
           type="email"
@@ -67,7 +67,7 @@ export default function Signup() {
           className={styles.input}
           {...register('email')}
         />
-        <small> {errors.email?.message} </small>
+        <p className={styles.signupError}> {errors.email?.message} </p>
         <input
           name="password"
           type="password"
@@ -75,7 +75,7 @@ export default function Signup() {
           className={styles.input}
           {...register('password')}
         ></input>
-        <small> {errors.password?.message} </small>
+        <p className={styles.signupError}> {errors.password?.message} </p>
         <input
           name="confirmPassword"
           type="password"
@@ -83,10 +83,10 @@ export default function Signup() {
           className={styles.input}
           {...register('confirmPassword')}
         ></input>
-        <small>{errors.confirmPassword?.message}</small>
+        <p className={styles.signupError}>{errors.confirmPassword?.message}</p>
         <button className={styles.button}>S'inscrire</button>
       </form>
-      <p className={styles.p}>
+      <p className={styles.switchPage}>
         Déjà inscrit ? <Link to="/login">Se connecter !</Link>{' '}
       </p>
     </>

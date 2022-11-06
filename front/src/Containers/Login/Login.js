@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Login.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -10,7 +10,7 @@ export default function Login(props) {
   const navigate = useNavigate();
   // durée en millisecondes, ici = 7 jours
   const maxAge = 1000 * 60 * 60 * 24 * 7;
-
+  const [messageError, setMessageError] = useState('');
   const [cookies, setCookie] = useCookies([]);
 
   const handleForm = (e) => {
@@ -39,6 +39,7 @@ export default function Login(props) {
         })
         .catch((err) => {
           console.log('catch axios post login', err);
+          setMessageError('La paire identifiant/mot de passe est incorrecte');
         });
     } catch (err) {
       console.log('catch handleForm login', err);
@@ -47,9 +48,8 @@ export default function Login(props) {
 
   return (
     <>
-      <div className="logoContainer">
-      </div>
-        <img className={styles.logo} src={Logo} alt="" />
+      <div className="logoContainer"></div>
+      <img className={styles.logo} src={Logo} alt="" />
 
       <form className={styles.form} onSubmit={handleForm}>
         <h1 className={styles.title}>Connexion</h1>
@@ -67,9 +67,11 @@ export default function Login(props) {
           className={styles.input}
           required
         ></input>
+        {messageError && <p className={styles.loginError}>{messageError}</p>}
+
         <button className={styles.button}>Se connecter</button>
       </form>
-      <p className={styles.p}>
+      <p className={styles.switchPage}>
         Pas encore inscrit ? <Link to="/signup">Inscrivez vous !</Link>{' '}
       </p>
     </>

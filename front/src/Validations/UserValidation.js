@@ -4,11 +4,11 @@ export const userSchema = yup.object().shape({
    firstName: yup
       .string()
       .required('ce champ est obligatoire')
-      .max(30, 'trop long!'),
+      .max(30, 'maximum 30 caractères !'),
    lastName: yup
       .string()
       .required('ce champ est obligatoire')
-      .max(30, 'trop long!'),
+      .max(30, 'maximum 30 caractères !'),
    email: yup
       .string()
       .email('email invalide')
