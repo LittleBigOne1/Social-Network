@@ -18,8 +18,10 @@ export default function Home() {
   const [postsData, setPostsData] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [error, setError] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false);
+
   const [cookies, setCookie] = useCookies([]);
-  //const userIdCookie = cookies.userId.split('').reverse().join('');
+  const userIdCookie = cookies.userId.split('').reverse().join('');
   const navigate = useNavigate();
   // console.log('token  ==>', cookies.token);
   // console.log('postData  ==>', postsData);
@@ -43,12 +45,9 @@ export default function Home() {
     axios
       .get('/auth/info')
       .then((data) => {
-        // console.log('data axios', data.data);
         const allUsers = data.data;
         setAllUsers(allUsers);
-        // -------- mettre dans une fonction -------
-        axiosPostData()
-        //-------------------------------
+        axiosPostData();
       })
       .catch((err) => {
         console.log('allUsers', allUsers);
@@ -57,18 +56,22 @@ export default function Home() {
 
         // console.log('catch axios allUsers ==> ', err);
       });
+
+    axios
+      .get('/auth/isadmin/' + userIdCookie)
+      .then((data) => {
+        setIsAdmin(data.data);
+      })
+      .catch(() => {
+        return false;
+      });
   }, []);
+  console.log(isAdmin);
 
-  // useEffect(() => {}, []);
-
-  // if (postsData.error || allUsers == null) {
-  //    console.log('if error');
-  //    navigate('/login');
-  // } else {
   return (
     <>
       <Navbar />
-      <CreatePost axiosPostData = {axiosPostData}/>
+      <CreatePost axiosPostData={axiosPostData} />
       <h1 className={styles.homeTitle}>Tous les articles</h1>
       <div className={styles.containerPosts}>
         {postsData
@@ -90,6 +93,8 @@ export default function Home() {
                 firstName={user.firstName}
                 lastName={user.lastName}
                 pp={user.profilePicture}
+                axiosPostData={axiosPostData}
+                isAdmin={isAdmin}
               />
             );
           })

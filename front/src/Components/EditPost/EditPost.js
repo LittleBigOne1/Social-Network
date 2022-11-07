@@ -9,6 +9,7 @@ axios.defaults.timeout = 6000;
 axios.defaults.withCredentials = true;
 
 export default function EditPost(props) {
+  console.log('props ------', props);
   const [cookies, setCookie] = useCookies([]);
   const userIdCookie =
     cookies.userId && cookies.userId.split('').reverse().join('');
@@ -25,6 +26,8 @@ export default function EditPost(props) {
     }
     try {
       await axios.put(`/posts/${props.id}`, formData);
+      props.axiosPostData()
+      props.toggleModal()
     } catch (err) {
       console.log(err);
     }

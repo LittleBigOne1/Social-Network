@@ -124,8 +124,11 @@ exports.getAllUsers = (req, res, next) => {
 
  exports.isAdmin = (req, res, next) => {
    userModel
-     .findOne({_id: req.params.id}) // méthode de récupération du tableau contenant l'ensemble des posts
+     .findOne({_id: req.params.id})
+
+
      .then((user) => {
+      console.log('---------------- user =====>',user);
        res.status(200).json(user.isAdmin);
      })
      .catch((error) => {

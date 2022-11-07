@@ -6,8 +6,6 @@
     border: var(--color1) solid 3px;
     border-radius: 1rem;
     width: 300px;
-    /* margin-left: auto;
-    margin-right: auto; */
     margin: 40px auto 10px auto;
     padding: 20px 0;
 }
@@ -19,15 +17,14 @@
     border-radius: 10px;
     border: none;
 }
+.loginError,.signupError{
+    color: red;
+    font-size: 12px;
+}
 .loginError{
-    color: red;
     text-align: center;
-    font-size: 12px;
 }
-.signupError{
-    color: red;
-    font-size: 12px;
-}
+
 .switchPage {
     text-align: center;
 }
@@ -39,10 +36,5 @@
 }
 
 .button {
-    padding: 3px 5px;
     margin-top: 10px;
-    border: var(--color3) solid 2px;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    /* background-color: white; */
-}
+   }

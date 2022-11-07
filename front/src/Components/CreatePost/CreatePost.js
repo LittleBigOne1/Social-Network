@@ -4,7 +4,6 @@ import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
-console.log(axios.defaults);
 // axios.defaults.baseURL='http://localhost:8000/api'
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 // axios.defaults.timeout=6000
@@ -57,7 +56,6 @@ export default function CreatePost(props) {
           <textarea className={styles.textarea} name="message" maxLength="1500" required />
 
           <label className={styles.labelFile} htmlFor="file">
-            {' '}
             Choisissez votre image
           </label>
           <input

@@ -27,24 +27,24 @@ export default function Card(props) {
   const [cookies, setCookie] = useCookies([]);
   const userIdCookie = cookies.userId.split('').reverse().join('');
 
-  const isAdmin = () => {
-    axios
-      .get('/auth/isadmin/' + userIdCookie)
-      .then((data) => {
-        // console.log('isAdmin ==========>',data.data);
-        return data.data;
-      })
-      .catch(() => {
-        return false;
-      });
-  };
+  // const isAdmin = () => {
+  //   axios
+  //     .get('/auth/isadmin/' + userIdCookie)
+  //     .then((data) => {
+
+  //       return data.data;
+  //     })
+  //     .catch(() => {
+  //       return false;
+  //     });
+  // };
   // console.log('---------------------',isAdmin());
   // console.log('------');
   // console.log('currentUser',userIdCookie);
   // console.log('auteur du post',props.userId);
   // console.log('-------',);
   const [displaySettings, setDisplaySettings] = useState(() => {
-    if (userIdCookie === props.userId || isAdmin()) {
+    if (userIdCookie === props.userId || props.isAdmin) {
       return true;
     } else {
       return false;
@@ -111,7 +111,7 @@ export default function Card(props) {
           </div>
         )}
       </div>
-      {modal && <EditPost message={props.message} id={props.id} toggleModal={toggleModal} />}
+      {modal && <EditPost message={props.message} id={props.id} toggleModal={toggleModal} axiosPostData={props.axiosPostData}/>}
       <div className={`${modal ? styles.displayNone : styles.cardText}`}>
         <p className={styles.message}>{props.message}</p>
       </div>
