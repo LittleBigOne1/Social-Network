@@ -29,7 +29,7 @@ export default function Signup() {
         console.log(response);
         console.log(response.status);
 
-        alert('Inscription réussite !');
+        alert('Inscription validée !');
         navigate('/login');
       })
       .catch((error) => {

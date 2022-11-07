@@ -31,18 +31,18 @@ export default function Card(props) {
     axios
       .get('/auth/isadmin/' + userIdCookie)
       .then((data) => {
-        console.log('isAdmin ==========>',data.data);
+        // console.log('isAdmin ==========>',data.data);
         return data.data;
       })
       .catch(() => {
         return false;
       });
   };
-  console.log('---------------------',isAdmin());
-  console.log('------');
-  console.log('currentUser',userIdCookie);
-  console.log('auteur du post',props.userId);
-  console.log('-------',);
+  // console.log('---------------------',isAdmin());
+  // console.log('------');
+  // console.log('currentUser',userIdCookie);
+  // console.log('auteur du post',props.userId);
+  // console.log('-------',);
   const [displaySettings, setDisplaySettings] = useState(() => {
     if (userIdCookie === props.userId || isAdmin()) {
       return true;
@@ -50,7 +50,7 @@ export default function Card(props) {
       return false;
     }
   });
-  console.log('réglages visibles',displaySettings);
+  // console.log('réglages visibles',displaySettings);
   const allUsers = props.allUsers;
   useEffect(() => {
     const user = allUsers.find((element) => element._id === props.userId);

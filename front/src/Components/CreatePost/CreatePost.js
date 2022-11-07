@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import  styles from './CreatePost.module.css';
+import styles from './CreatePost.module.css';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
-
-
+console.log(axios.defaults);
 // axios.defaults.baseURL='http://localhost:8000/api'
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 // axios.defaults.timeout=6000
@@ -22,7 +21,6 @@ export default function CreatePost(props) {
 
   const handleFormPost = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
     formData.append('userId', userIdCookie);
     formData.append('message', e.target['message'].value);
@@ -30,26 +28,22 @@ export default function CreatePost(props) {
       formData.append('file', file);
     }
     try {
-      await axios.post(
-        '/posts/',
-        formData
-        //  {
-        //    headers: {
-        //       'Content-Type': 'multipart/form-data',
-        //    },
-        // }
-      )
-         // .then(navigate('/'))
-       window.location.reload();
-      // navigate('/')
+      await axios.post('/posts/', formData);
+      // .then(navigate('/'))
 
-      // e.target['message'].value = '';
+      //  window.location.reload(); <======================== à remettre
+      props.axiosPostData();
+      // navigate('/')
+      e.target['message'].value = '';
+      // e.target.files[0].value = '';
       // setFile(null);
     } catch (err) {
       console.log(err);
     }
   };
   const handleFile = (e) => {
+    console.log(e.target.files[0]);
+
     setFile(e.target.files[0]);
   };
   return (
@@ -57,12 +51,15 @@ export default function CreatePost(props) {
       <>
         <h2 className={styles.title}>Créer un article</h2>
         <form className={styles.form} onSubmit={handleFormPost}>
-          <label htmlFor="message" className="form__title">
+          <label htmlFor="message" className={styles.formTitle}>
             Exprimez-vous !
           </label>
-          <textarea className={styles.textarea} name="message" required />
-          
-          <label className={styles.labelFile} htmlFor="file"> Choisissez votre image</label>
+          <textarea className={styles.textarea} name="message" maxLength="1500" required />
+
+          <label className={styles.labelFile} htmlFor="file">
+            {' '}
+            Choisissez votre image
+          </label>
           <input
             onChange={handleFile}
             accept=".jpg, .jpeg, .png"

@@ -23,7 +23,7 @@ export default function Login(props) {
       };
 
       axios
-        .post('http://localhost:8000/api/auth/login', userInfo)
+        .post('/auth/login', userInfo)
         .then((data) => {
           setCookie('token', data.data.token, {
             path: '/',
