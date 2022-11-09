@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import styles from './Login.module.css';
 import { Link, useNavigate } from 'react-router-dom';
+import styles from './Login.module.css';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 
@@ -8,47 +8,43 @@ import Logo from '../../assets/images/icon-colored.png';
 
 export default function Login(props) {
   const navigate = useNavigate();
-  // durée en millisecondes, ici = 7 jours
-  const maxAge = 1000 * 60 * 60 * 24 * 7;
+  // durée en millisecondes, ici = 1 jours
+  const maxAge = 1000 * 60 * 60 * 24;
   const [messageError, setMessageError] = useState('');
   const [cookies, setCookie] = useCookies([]);
 
+  // fonction d'envoie du formulaire de connexion
   const handleForm = (e) => {
     e.preventDefault();
 
-    try {
-      const userInfo = {
-        email: e.target['email'].value,
-        password: e.target['password'].value,
-      };
-
-      axios
-        .post('/auth/login', userInfo)
-        .then((data) => {
-          setCookie('token', data.data.token, {
-            path: '/',
-            maxAge: maxAge,
-          });
-          setCookie('userId', data.data.userId.split('').reverse().join(''), {
-            path: '/',
-            maxAge: maxAge,
-          });
-        })
-        .then(() => {
-          navigate('/');
-        })
-        .catch((err) => {
-          console.log('catch axios post login', err);
-          setMessageError('La paire identifiant/mot de passe est incorrecte');
+    // création de l'objet à en envoyer
+    const userInfo = {
+      email: e.target['email'].value,
+      password: e.target['password'].value,
+    };
+    // axios post pour envoyer les informations de connexion
+    axios
+      .post('/auth/login', userInfo)
+      .then((data) => {
+        setCookie('token', data.data.token, {
+          path: '/',
+          maxAge: maxAge,
         });
-    } catch (err) {
-      console.log('catch handleForm login', err);
-    }
+        setCookie('userId', data.data.userId.split('').reverse().join(''), {
+          path: '/',
+          maxAge: maxAge,
+        });
+      })
+      .then(() => {
+        navigate('/');
+      })
+      .catch((err) => {
+        setMessageError('La paire identifiant/mot de passe est incorrecte');
+      });
   };
 
   return (
     <>
-      <div className="logoContainer"></div>
       <img className={styles.logo} src={Logo} alt="" />
 
       <form className={styles.form} onSubmit={handleForm}>

@@ -8,6 +8,7 @@
 .textarea {
     font-family: lato;
     width: 100%;
+    height: 100px;
     resize: none;
     overflow-y: visible;
     border-radius: 10px;
@@ -22,12 +23,11 @@
     margin: 10px 0;
 }
 
+.inputFile {
+    max-width: 70%;
+}
+
 .submitButton,
 .cancelButton {
     margin: 0 5px;
-    /* padding: 5px;
-    border: var(--color3) 1px solid;
-    border-radius: 0.5rem;
-    background-color: #fff;
-    cursor: pointer; */
 }

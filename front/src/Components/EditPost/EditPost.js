@@ -3,13 +3,7 @@ import styles from './EditPost.module.css';
 import { useCookies } from 'react-cookie';
 
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:8000/api';
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-axios.defaults.timeout = 6000;
-axios.defaults.withCredentials = true;
-
 export default function EditPost(props) {
-  console.log('props ------', props);
   const [cookies, setCookie] = useCookies([]);
   const userIdCookie =
     cookies.userId && cookies.userId.split('').reverse().join('');
@@ -19,15 +13,14 @@ export default function EditPost(props) {
     e.preventDefault();
 
     const formData = new FormData();
-    console.log(formData);
     formData.append('message', e.target['message'].value);
     if (file !== null) {
       formData.append('file', file);
     }
     try {
       await axios.put(`/posts/${props.id}`, formData);
-      props.axiosPostData()
-      props.toggleModal()
+      props.axiosPostData();
+      props.toggleModal();
     } catch (err) {
       console.log(err);
     }

@@ -4,9 +4,6 @@ import axios from 'axios';
 import likeButton from '../../assets/images/likeButton.svg';
 import likeButtonRed from '../../assets/images/likeButtonRed.svg';
 
-import AxiosPost from '../../useAxiosPost';
-import useAxiosPost from '../../useAxiosPost';
-
 import { useCookies } from 'react-cookie';
 
 axios.defaults.baseURL = 'http://localhost:8000/api';
@@ -31,52 +28,24 @@ export default function Like(props) {
     isLiked();
   }, []);
 
-  // console.log(props);
-  // console.log(`http://localhost:3000/api/${props.id}/like`);
-  // const { data, loading, error } = useAxiosPost(`http://localhost:3000/api/${props.id}`);
   const [likeCounter, setLikeCounter] = useState(props.likes);
   const addLike = () => {
-    if (
-      !toggle
-      //   && !usersLiked.includes(userIdCookie)
-    ) {
-      console.log('if toggle false');
+    if (!toggle) {
       setLikeCounter(likeCounter + 1);
       setToggle(!toggle);
-      // post +1 pour like
-      axios
-        .post(`/posts/${props.id}/like`, {
-          userId: userIdCookie,
-          like: 1,
-        })
-        .then((data) => {
-          console.log(data);
-        })
-
-        .catch((err) => {
-          console.log('catch axios post like', err);
-        });
+      axios.post(`/posts/${props.id}/like`, {
+        userId: userIdCookie,
+        like: 1,
+      });
     }
-    if (
-      toggle
-      //  && usersLiked.includes(userIdCookie)
-    ) {
-      console.log('if toggle true');
+    if (toggle) {
       setLikeCounter(likeCounter - 1);
       setToggle(!toggle);
       // post 0 pour annuler le like
-      axios
-        .post(`/posts/${props.id}/like`, {
-          userId: userIdCookie,
-          like: 0,
-        })
-        .then((data) => {
-          console.log(data);
-        })
-
-        .catch((err) => {
-          console.log('catch axios post undo like', err);
-        });
+      axios.post(`/posts/${props.id}/like`, {
+        userId: userIdCookie,
+        like: 0,
+      });
     }
   };
 

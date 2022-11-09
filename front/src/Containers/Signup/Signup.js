@@ -25,15 +25,12 @@ export default function Signup() {
     console.log(data);
     axios
       .post('/auth/signup', data)
-      .then((response) => {
-        console.log(response);
-        console.log(response.status);
-
+      .then((res) => {
         alert('Inscription validée !');
         navigate('/login');
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       });
   };
 

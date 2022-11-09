@@ -6,11 +6,11 @@
 .formTitle,
 .textarea,
 .inputFile,
-.labelFile,
 .button {
     margin: 10px 0;
 
 }
+
 .form {
     padding: 20px 0;
     width: 70%;
@@ -24,49 +24,32 @@
     border: var(--color1) solid 3px;
     border-radius: 1rem;
 }
-.inputFile[type="file"]{
-    color: red;
-}
+
 .form__title {
-    font-weight: bold !important;
-    background-color: rgb(0, 0, 0) !important;
+    font-weight: bold;
+    background-color: rgb(0, 0, 0)
 }
 
 .textarea {
     font-family: lato;
     width: 80%;
-    /* min-height: 60px; */
-    /* height: auto; */
-    margin: 10px;
+    height: 100px;    margin: 10px;
     padding: 5px;
     border-radius: 10px;
     border: 2px solid var(--color3);
     resize: none;
     overflow-y: visible;
-    /* height: fit-content; */
-    outline: none;
-
-
 }
 
- .labelFile{
+.labelFile {
     border: var(--color3) 1px solid;
     border-radius: 0.5rem;
     background-color: white;
     padding: 5px;
     cursor: pointer;
- }
+}
+
 .inputFile {
     padding: 10px;
-    /* display: none; */
-}
-
-.textarea:focus {
-    border: none;
-
-}
-
-.button {
-    
-
+    max-width: 70%;
 }

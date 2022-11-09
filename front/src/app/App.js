@@ -8,17 +8,17 @@ import Login from '../Containers/Login/Login';
 import Signup from '../Containers/Signup/Signup';
 
 function App() {
-   return (
-      <Router>
-         {/* <Navbar /> */}
-         <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/*" element={<NotFound />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-         </Routes>
-      </Router>
-   );
+  return (
+    <Router>
+      {/* <Navbar /> */}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/*" element={<NotFound />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

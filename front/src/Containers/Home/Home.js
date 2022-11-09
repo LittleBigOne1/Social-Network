@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+
 import styles from './Home.module.css';
 import Card from '../../Components/Card/Card';
 import CreatePost from '../../Components/CreatePost/CreatePost';
-// import useFetch from '../../useFetch';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
@@ -21,22 +21,22 @@ export default function Home() {
   const [isAdmin, setIsAdmin] = useState(false);
 
   const [cookies, setCookie] = useCookies([]);
-  const userIdCookie = cookies.userId.split('').reverse().join('');
   const navigate = useNavigate();
-  // console.log('token  ==>', cookies.token);
-  // console.log('postData  ==>', postsData);
+  let userIdCookie;
+  if (cookies.userId !== undefined) {
+    userIdCookie = cookies.userId.split('').reverse().join('');
+  } else {
+    navigate('/login');
+  }
 
   const axiosPostData = () => {
     axios
       .get('/posts')
       .then((data) => {
-        // console.log('data axios', data.data);
-
         setPostsData(data.data);
       })
       .catch((err) => {
         navigate('/login', { replace: true });
-        console.log('catch axios allPosts==> ', err);
         setError(err);
       });
   };
@@ -50,11 +50,7 @@ export default function Home() {
         axiosPostData();
       })
       .catch((err) => {
-        console.log('allUsers', allUsers);
-
         navigate('/login', { replace: true });
-
-        // console.log('catch axios allUsers ==> ', err);
       });
 
     axios
@@ -66,7 +62,6 @@ export default function Home() {
         return false;
       });
   }, []);
-  console.log(isAdmin);
 
   return (
     <>

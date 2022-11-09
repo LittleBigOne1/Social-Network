@@ -6,7 +6,6 @@ const userModel = require('../models/user');
 exports.createPost = (req, res) => {
   const postObject = req.body;
   if (req.file) {
-    console.log('IF REQ.FILE');
     const post = new postModel({
       ...postObject,
       imageUrl: `${req.protocol}://${req.get('host')}/images/${
@@ -22,7 +21,6 @@ exports.createPost = (req, res) => {
         res.status(400).json({ error });
       });
   } else {
-    console.log('REQ.FILE = FALSE');
     const post = new postModel({
       ...postObject,
     });
@@ -51,10 +49,8 @@ exports.updatePost = (req, res) => {
     : { ...req.body };
   req.file &&
     postModel.findOne({ _id: req.params.id }).then((post) => {
-      console.log('POST ======>', post);
       if (post.imageUrl) {
         const filename = post.imageUrl.split('/images/')[1];
-        console.log(filename);
         fs.unlink(`images/${filename}`, (error) => {
           if (error) throw error;
         });
@@ -69,7 +65,6 @@ exports.updatePost = (req, res) => {
     });
 };
 
-
 // export de la fonction d'affichage de tous les posts
 exports.getAllPosts = (req, res, next) => {
   postModel
@@ -78,7 +73,6 @@ exports.getAllPosts = (req, res, next) => {
       res.status(200).json(posts);
     })
     .catch((error) => {
-      console.log('========CATCH get all post ========');
       res.status(400).json({ error: error });
     });
 };
@@ -89,12 +83,9 @@ exports.deletePost = (req, res, next) => {
     postModel
       .findOne({ _id: req.params.id })
       .then((post) => {
-        console.log('----- post -------', post);
-        console.log('----- req.auth.userId -------', req.auth.userId);
         if (post.userId === req.auth.userId || user.isAdmin) {
           if (post.imageUrl) {
             const filename = post.imageUrl.split('/images/')[1];
-            console.log('-------- filename --------', filename);
             // suppression de l'image puis
             fs.unlink(`images/${filename}`, () => {
               postModel
@@ -123,8 +114,6 @@ exports.deletePost = (req, res, next) => {
 };
 exports.likeOrNot = (req, res, next) => {
   // retourne le seul post ayant pour identifiant celui indiqué en paramètre
-  // console.log(req);
-  console.log('------- je suis dans la fonction like ------');
   postModel
     .findOne({ _id: req.params.id })
     .then((post) => {

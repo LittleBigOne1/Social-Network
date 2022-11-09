@@ -1,21 +1,22 @@
 # GROUPANIA
+
 ##### _Le réseaux de social d'entreprise de Gropoumania_
 
 ## **Installation** :
 
 **BACKEND**
 
-* Depuis le dossier back installer les dépendences avec la commandes `npm install`.
-* Lancer le serveur avec la commande `npm start`.
-
+- créer un fichier .env avec les
+- Depuis le dossier back installer les dépendences avec la commandes `npm install`.
+- Lancer le serveur avec la commande `npm start`.
 
 **FRONT**
 
-* Depuis le dossier front installer les dépendences avec la commandes `npm install`.
-* Lancer le serveur avec la commande `npm start`.
-* Si l'onglet ne s'ouvre pas automatiquement, se rendre ici : http://localhost:3000
+- Depuis le dossier front installer les dépendences avec la commandes `npm install`.
+- Lancer le serveur avec la commande `npm start`.
+- Si l'onglet ne s'ouvre pas automatiquement, se rendre ici : http://localhost:3000
 
-***
+---
 
 ## **Dépendances** :
 
