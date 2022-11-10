@@ -45,7 +45,7 @@ export default function Card(props) {
   };
 
   return (
-    <div className={styles.card} id="card">
+    <article className={styles.card} id="card">
       <div className={styles.cardHeader}>
         <div className={styles.cardHeaderPpName}>
           <div className={styles.pp}>
@@ -55,9 +55,9 @@ export default function Card(props) {
             </span>
           </div>
           <div className={styles.nameTime}>
-            <h4>
+            <h3>
               {props.firstName} {props.lastName}
-            </h4>
+            </h3>
             <Moment className={styles.timeStamp} format=" HH:mm - DD/MM/YY ">
               {props.createdAt}
             </Moment>
@@ -68,13 +68,19 @@ export default function Card(props) {
             <img
               onClick={toggleModal}
               src={Edit}
-              alt="bouton de suppression d'article"
+              alt="bouton de modification d'article"
+              title="Modifier l'article"
+              role="button"
+              tabIndex="0"
               className={styles.editButton}
             />
             <img
               onClick={deletePost}
               src={Close}
               alt="bouton de suppression d'article"
+              title="Supprimer l'article"
+              role="button"
+              tabIndex="0"
               className={styles.closeButton}
             />
           </div>
@@ -102,6 +108,6 @@ export default function Card(props) {
           <Like likes={totalLikes} id={postId} usersLiked={usersLiked} />
         </div>
       </div>
-    </div>
+    </article>
   );
 }

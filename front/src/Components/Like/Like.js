@@ -57,6 +57,9 @@ export default function Like(props) {
           alt="likeButton"
           className={styles.likeButton}
           onClick={addLike}
+          title="Retirer le like"
+          role="button"
+          tabIndex="0"
         />
       ) : (
         <img
@@ -64,6 +67,9 @@ export default function Like(props) {
           alt="likeButton"
           className={styles.likeButton}
           onClick={addLike}
+          title="Liker l'article"
+          role="button"
+          tabIndex="0"
         />
       )}
 

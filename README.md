@@ -6,14 +6,20 @@
 
 **BACKEND**
 
-- créer un fichier .env avec les
+- créer un fichier .env dans le dossier `back` et y coller ceci:
+
+MDB_URI = "mongodb+srv://user1:VPv3UAYPV7iNOSWP@clusterp7.b70vo1b.mongodb.net/test"
+TOKEN_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MzBmNTVmNjJkZjQzMzBmZjZhYmYzOWQiLCJpYXQiOjE2NjI5NzA2MTYsImV4cCI6MTY2MzA1NzAxNn0.1yWkESaVDvTFVoBN7jD8S4-PG3vFGCxXmT22mh1GWXQ"
+PORT=8000
+
+
 - Depuis le dossier back installer les dépendences avec la commandes `npm install`.
-- Lancer le serveur avec la commande `npm start`.
+- Depuis le dossier back lancer le serveur avec la commande `npm start`.
 
 **FRONT**
 
 - Depuis le dossier front installer les dépendences avec la commandes `npm install`.
-- Lancer le serveur avec la commande `npm start`.
+- Depuis le dossier front lancer le serveur avec la commande `npm start`.
 - Si l'onglet ne s'ouvre pas automatiquement, se rendre ici : http://localhost:3000
 
 ---

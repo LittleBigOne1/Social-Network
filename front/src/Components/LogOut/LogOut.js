@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Logout from '../../assets/images/logout.svg';
-import styles from './LogOutLogout.module.css';
 
 export default function LogOut() {
   const navigate = useNavigate();
@@ -16,9 +15,10 @@ export default function LogOut() {
       <img
         role="button"
         onClick={handleLogout}
-        className={styles.logout}
         src={Logout}
         alt="Se déconnecter"
+        tabIndex="0"
+        title="déconnexion"
       />
     </>
   );

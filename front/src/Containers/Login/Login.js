@@ -50,16 +50,18 @@ export default function Login(props) {
       <form className={styles.form} onSubmit={handleForm}>
         <h1 className={styles.title}>Connexion</h1>
         <input
+          title="Email"
           name="email"
           type="email"
-          placeholder="entrez votre email"
+          placeholder="Email"
           className={styles.input}
           required
         />
         <input
+          title="Mot de passe"
           name="password"
           type="password"
-          placeholder="entrez votre mot de passe"
+          placeholder="Mot de passe"
           className={styles.input}
           required
         ></input>

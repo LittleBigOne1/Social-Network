@@ -47,7 +47,10 @@ export default function CreatePost(props) {
             className={styles.textarea}
             name="message"
             maxLength="1500"
+            placeholder="Entrez votre message ici..."
+            title="Message"
             required
+            aria-label="message"
           />
 
           <input
@@ -57,8 +60,12 @@ export default function CreatePost(props) {
             name="file"
             className={styles.inputFile}
             type="file"
+            aria-label="file"
+            tabIndex="0"
           />
-          <button className={styles.button}>Publier</button>
+          <button className={styles.button} role="button" tabIndex="0">
+            Publier
+          </button>
         </form>
       </>
     )

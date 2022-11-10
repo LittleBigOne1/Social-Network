@@ -9,7 +9,7 @@ export default function Navbar() {
     <>
       <nav>
         <div className={styles.logoContainer}>
-          <img className={styles.logo} src={Logo} alt="logo groupomania" />
+          <img className={styles.logo} src={Logo} alt="logo groupomania"/>
         </div>
         <div className={styles.logout}>
           <LogOut className={styles.logoutButton} />

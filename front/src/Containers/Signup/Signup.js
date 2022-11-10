@@ -41,6 +41,7 @@ export default function Signup() {
         <h1 className={styles.title}>Inscription</h1>
 
         <input
+          title="Prénom"
           name="firstName"
           type="text"
           className={styles.input}
@@ -49,6 +50,7 @@ export default function Signup() {
         />
         <p className={styles.signupError}> {errors.firstName?.message} </p>
         <input
+          title="Nom"
           name="lastName"
           type="text"
           className={styles.input}
@@ -58,6 +60,7 @@ export default function Signup() {
         />
         <p className={styles.signupError}> {errors.lastName?.message} </p>
         <input
+          title="Email"
           name="email"
           type="email"
           placeholder="Email"
@@ -66,6 +69,7 @@ export default function Signup() {
         />
         <p className={styles.signupError}> {errors.email?.message} </p>
         <input
+          title="Mot de passe"
           name="password"
           type="password"
           placeholder="Mot de passe"
@@ -74,6 +78,7 @@ export default function Signup() {
         ></input>
         <p className={styles.signupError}> {errors.password?.message} </p>
         <input
+          title="Confirmation le mot de passe"
           name="confirmPassword"
           type="password"
           placeholder="Confirmez le mot de passe"

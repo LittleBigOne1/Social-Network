@@ -67,8 +67,8 @@ export default function Home() {
     <>
       <Navbar />
       <CreatePost axiosPostData={axiosPostData} />
-      <h1 className={styles.homeTitle}>Tous les articles</h1>
-      <div className={styles.containerPosts}>
+      <h1 className={styles.title}>Tous les articles</h1>
+      <section className={styles.containerPosts}>
         {postsData
           .map((item) => {
             const user = allUsers.find(
@@ -94,7 +94,7 @@ export default function Home() {
             );
           })
           .reverse()}
-      </div>
+      </section>
     </>
   );
   // }
