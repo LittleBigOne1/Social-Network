@@ -32,7 +32,7 @@ export default function Card(props) {
     axios
       .delete(`/posts/${props.id}`)
       .then((data) => {
-        e.target.closest('#card').remove();
+        props.axiosPostData();
       })
 
       .catch((err) => {

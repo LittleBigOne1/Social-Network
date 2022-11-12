@@ -70,7 +70,7 @@ export default function Login(props) {
         <button className={styles.button}>Se connecter</button>
       </form>
       <p className={styles.switchPage}>
-        Pas encore inscrit ? <Link to="/signup">Inscrivez vous !</Link>{' '}
+        Pas encore inscrit ? <Link to="/signup">Inscrivez vous !</Link>
       </p>
     </>
   );

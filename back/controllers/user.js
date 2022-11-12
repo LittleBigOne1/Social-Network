@@ -1,11 +1,8 @@
 const userModel = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-// durée en millisecondes, ici = 7 jours
-const maxAge = 1000 * 60 * 60 * 24 * 7;
-
-//const dotenv = require('dotenv');
-//dotenv.config();
+// durée en millisecondes, ici = 1 jours
+const maxAge = 1000 * 60 * 60 * 24
 
 // inscription
 exports.signup = (req, res, next) => {
@@ -39,31 +36,19 @@ exports.login = (req, res, next) => {
           if (!valid) {
             return res.status(401).json({ error: 'Mot de passe incorrect !' });
           }
-          ///////// test avec token DEBUT //////////////////////////////////
           const token = jwt.sign({ userId: user._id }, process.env.TOKEN_KEY, {
             expiresIn: maxAge,
           });
           res.cookie('token', token, {
             httpOnly: true,
-            // secure: true,
             maxAge: maxAge,
-            // signed : true,
           });
           res.status(200).json({
             message: 'Connexion effectuée',
             token: token,
             userId: user._id,
           });
-          ///////// test avec token FIN //////////////////////////////////
-
-          /**
-          res.status(200).json({
-            userId: user._id,
-            // encode le user.id (1er argument) avec la clé secrète d'encryptage (2nd argument)
-            token: jwt.sign({ userId: user._id }, process.env.TOKEN_KEY, {
-              expiresIn: '7d',
-            }),
-          }); */
+          
         })
         .catch((error) => res.status(500).json(error + ' + pb avec le token'));
     })

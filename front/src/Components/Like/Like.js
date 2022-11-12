@@ -41,7 +41,6 @@ export default function Like(props) {
     if (toggle) {
       setLikeCounter(likeCounter - 1);
       setToggle(!toggle);
-      // post 0 pour annuler le like
       axios.post(`/posts/${props.id}/like`, {
         userId: userIdCookie,
         like: 0,

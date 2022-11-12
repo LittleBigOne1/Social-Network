@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export default function CreatePost(props) {
   const [cookies, setCookie] = useCookies([]);
   const [file, setFile] = useState(null);
-
+  
   const navigate = useNavigate();
 
   const userIdCookie =

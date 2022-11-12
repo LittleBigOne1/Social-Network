@@ -75,7 +75,7 @@ export default function Home() {
               (element) => element._id === item.userId
             );
             return (
-              <Card
+              <Car   d
                 message={item.message}
                 key={item._id}
                 id={item._id}
@@ -97,5 +97,4 @@ export default function Home() {
       </section>
     </>
   );
-  // }
 }
