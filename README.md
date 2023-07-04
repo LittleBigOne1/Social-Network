@@ -1,6 +1,6 @@
-# GROUPANIA
+# SocialvNetwork
 
-##### _Le réseaux de social d'entreprise de Gropoumania_
+##### _Le réseaux de social d'entreprise
 
 ## **Installation** :
 
